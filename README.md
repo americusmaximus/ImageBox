@@ -1,10 +1,10 @@
 # ImageBox
-ImageBox is a C# image processing library with a wide range of options for user to use. ImageBox is a library, as well as CLI interface for it.
+ImageBox is a C# image processing library with a wide range of options for user to use. ImageBox is a library, as well as CLI and GUI interfaces for it.
 
 ImageBox is a library that runs on .Net Framework 4.0, 4.5, 4.7, 4.8, .Net Core 3.1, as well as .Net 5. Please see Build and Usage sections below for details.
 
 ## Example
-Example shows application of a 1.3 contrast. Please see original and modified images below.
+Example shows application of a contrast with value of 1.3, as well as Sepia. Please see original and modified images below.
 
 
 ![Example of contrast modification image with ImageBox](https://github.com/americusmaximus/ImageBox/blob/main/Docs/Unsplash.Original.jpg)
@@ -134,6 +134,7 @@ The following command line produces an image shown below.
 >ImageBox.CLI.exe mode=color matrix=contrast matrixvalue=1.3 image=C:\Unsplash.Original.jpg output=C:\Unsplash.Contrast.1.3.png
 
 Resulting image:
+
 ![Example of contrast modification image with ImageBox](https://github.com/americusmaximus/ImageBox/blob/main/Docs/Unsplash.Contrast.1.3.png)
 
 
