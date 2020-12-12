@@ -1,3 +1,5 @@
+﻿#region License
+/*
 MIT License
 
 Copyright (c) 2020 Americus Maximus
@@ -19,3 +21,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#endregion
+
+using System.Drawing.Imaging;
+
+namespace ImageBox.UI.Windows.Split
+{
+    public class ImageFormatComboBoxItem
+    {
+        public virtual ImageFormat Format { get; set; }
+
+        public virtual string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+}

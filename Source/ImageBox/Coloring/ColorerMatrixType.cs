@@ -1,3 +1,5 @@
+﻿#region License
+/*
 MIT License
 
 Copyright (c) 2020 Americus Maximus
@@ -19,3 +21,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#endregion
+
+namespace ImageBox.Coloring
+{
+    public enum ColorerMatrixType
+    {
+        Achromatomaly = 0,
+        Achromatopsia = 1,
+        AverageGrayScale = 2,
+        BlackAndWhite = 3,
+        Brightness = 4,
+        Cold = 5,
+        Contrast = 6,
+        Deuteranomaly = 7,
+        Deuteranopia = 8,
+        Exposure = 9,
+        GrayScale = 10,
+        Inverted = 11,
+        LuminanceToAlpha = 12,
+        Negative = 13,
+        NightVision = 14,
+        Normal = 15,
+        Polaroid = 16,
+        Protanomaly = 17,
+        Protanopia = 18,
+        RGBBGR = 19,
+        Saturation = 20,
+        Sepia = 21,
+        Temperature = 22,
+        Threshold = 23,
+        Tint = 24,
+        Tritanomaly = 25,
+        Tritanopia = 26,
+        Warm = 27,
+        WhiteToAlpha = 28
+    }
+}

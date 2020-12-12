@@ -1,3 +1,5 @@
+﻿#region License
+/*
 MIT License
 
 Copyright (c) 2020 Americus Maximus
@@ -19,3 +21,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#endregion
+
+using System;
+using System.Drawing;
+using System.Drawing.Imaging;
+
+namespace ImageBox.Coloring
+{
+    public class Colorer
+    {
+        public Colorer(Image image)
+        {
+            Image = image ?? throw new ArgumentNullException(nameof(image));
+        }
+
+        public virtual Image Image { get; protected set; }
+
+        public virtual Image Color(ColorMatrix colorMatrix)
+        {
+            if (colorMatrix == default) { throw new ArgumentNullException(nameof(colorMatrix)); }
+
+            var result = new Bitmap(Image.Width, Image.Height);
+
+            using (var g = Graphics.FromImage(result))
+            {
+                using (var attributes = new ImageAttributes())
+                {
+                    attributes.SetColorMatrix(colorMatrix);
+
+                    g.DrawImage(Image, new Rectangle(0, 0, Image.Width, Image.Height), 0, 0, Image.Width, Image.Height, GraphicsUnit.Pixel, attributes);
+                }
+            }
+
+            return result;
+        }
+    }
+}

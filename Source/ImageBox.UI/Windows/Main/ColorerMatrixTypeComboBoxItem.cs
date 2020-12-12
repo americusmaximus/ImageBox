@@ -1,3 +1,5 @@
+﻿#region License
+/*
 MIT License
 
 Copyright (c) 2020 Americus Maximus
@@ -19,3 +21,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+*/
+#endregion
+
+using ImageBox.Coloring;
+using System;
+
+namespace ImageBox.UI.Windows.Main
+{
+    public class ColorerMatrixTypeComboBoxItem
+    {
+        public virtual ColorerMatrixDescriptor Descriptor { get; set; }
+
+        public virtual string Name { get; set; }
+
+        public virtual Nullable<ColorerMatrixType> Type { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+}
