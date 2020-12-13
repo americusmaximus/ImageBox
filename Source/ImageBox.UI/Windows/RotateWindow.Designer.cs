@@ -117,7 +117,6 @@ namespace ImageBox.UI.Windows
             // 
             // MainColorDialog
             // 
-            this.MainColorDialog.AllowFullOpen = false;
             this.MainColorDialog.Color = System.Drawing.Color.Transparent;
             this.MainColorDialog.FullOpen = true;
             // 
