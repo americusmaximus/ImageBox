@@ -55,8 +55,9 @@ namespace ImageBox.UI.Windows
         {
             var components = new List<ButtonComponent>()
             {
-                new ButtonComponent() { Text = "Color an Image", Action = (s, ae) => { Hide();  using(var w = new ColoringWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
+                new ButtonComponent() { Text = "Color an Image", Action = (s, ae) => { Hide();  using(var w = new ColorWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
                 new ButtonComponent() { Text = "Split an Image", Action = (s, ae) => { Hide();  using(var w = new SplitWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
+                new ButtonComponent() { Text = "Rotate an Image", Action = (s, ae) => { Hide();  using(var w = new RotateWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
                 new ButtonComponent() { Text = "Image Statistics", Action = (s, ae) => { Hide();  using(var w = new StatisticsWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } }
             };
 

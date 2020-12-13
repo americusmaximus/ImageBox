@@ -38,9 +38,9 @@ using System.Windows.Forms;
 
 namespace ImageBox.UI.Windows
 {
-    public partial class ColoringWindow : Form
+    public partial class ColorWindow : Form
     {
-        public ColoringWindow()
+        public ColorWindow()
         {
             InitializeComponent();
         }
@@ -152,6 +152,7 @@ namespace ImageBox.UI.Windows
 
             PresetComboBox.SelectedValueChanged += PresetComboBoxSelectedValueChanged;
         }
+
         protected virtual void ContrastTrackBarScroll(object sender, EventArgs e)
         {
             ContrastValueLabel.Text = ((float)ContrastTrackBar.Value / 100).ToString("F");

@@ -1,7 +1,7 @@
 ﻿
 namespace ImageBox.UI.Windows
 {
-    partial class ColoringWindow
+    partial class ColorWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace ImageBox.UI.Windows
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColoringWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ColorWindow));
             this.MainPanel = new System.Windows.Forms.Panel();
             this.CustomGroupBox = new System.Windows.Forms.GroupBox();
             this.BlueTrackBar = new System.Windows.Forms.TrackBar();
@@ -437,7 +437,7 @@ namespace ImageBox.UI.Windows
             // 
             this.openToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.OpenFile_16x;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "&Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
@@ -445,19 +445,19 @@ namespace ImageBox.UI.Windows
             // 
             this.saveToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.ExportFile_16x;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
             // MainToolStripSeparator
             // 
             this.MainToolStripSeparator.Name = "MainToolStripSeparator";
-            this.MainToolStripSeparator.Size = new System.Drawing.Size(177, 6);
+            this.MainToolStripSeparator.Size = new System.Drawing.Size(100, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -465,7 +465,7 @@ namespace ImageBox.UI.Windows
             // 
             this.MainSaveFileDialog.Filter = resources.GetString("MainSaveFileDialog.Filter");
             // 
-            // ColoringWindow
+            // ColorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -474,7 +474,7 @@ namespace ImageBox.UI.Windows
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.ImageBoxMenuStrip);
             this.MinimumSize = new System.Drawing.Size(900, 600);
-            this.Name = "ColoringWindow";
+            this.Name = "ColorWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ImageBox";
             this.Load += new System.EventHandler(this.ColoringWindowLoad);
