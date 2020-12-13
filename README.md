@@ -70,6 +70,9 @@ Below is the output of running a help command
 ##### angle
 [Rotate] A floating-point angle for the image rotation. Default value is <0> (zero).
 
+##### color
+[Rotate] A fill color. Color can be specified as a name,  ARGB integer, or a HEX value. Example: "red", "-65536", "#00ff0000". Default value is "Transparent".
+
 ##### format
 [Split] An output image(s) format. Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG, TIFF, and WMF. Default value is BMP.
 

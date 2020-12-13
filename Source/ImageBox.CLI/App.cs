@@ -32,6 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -44,6 +45,7 @@ namespace ImageBox.CLI
         static readonly Dictionary<string, string> Help = new Dictionary<string, string>()
         {
             { "angle",            "[Rotate] A floating-point angle for the image rotation.\n                    Default value is <0> (zero)." },
+            { "color",            "[Rotate] A fill color. Color can be specified as a name,\n                    ARGB integer, or a HEX value.\n                    Example: \"red\", \"-65536\", \"#00ff0000\".\n                    Default value is \"Transparent\"."},
             { "format",           "[Split] An output image(s) format.\n                    Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG,\n                    TIFF, and WMF.\n                    Default value is BMP."},
             { "horizontal",       "[Split] A positive integer number of horizontal units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."},
             { "image",            "A path to the input image file.\n                    Image is a required parameter.\n                    Supported image formats are BMP, EMF, EXIF, GIF, ICON,\n                    JPEG, PNG, TIFF, and WMF." },
@@ -321,6 +323,7 @@ namespace ImageBox.CLI
             var colorMatrixValue = new Nullable<float>();
 
             var rotateAngle = 0.0f;
+            var rotateColor = System.Drawing.Color.Transparent;
 
             var splitHorizontal = new Nullable<int>();
             var splitImageFormat = ImageFormat.Bmp;
@@ -396,6 +399,19 @@ namespace ImageBox.CLI
                                 else
                                 {
                                     Console.WriteLine(string.Format("Unable to parse <0> as a floating point number.", value));
+
+                                    return -1;
+                                }
+                            }
+                            else if (key == "color")
+                            {
+                                if (TryParseColor(value, out var color))
+                                {
+                                    rotateColor = color;
+                                }
+                                else
+                                {
+                                    Console.WriteLine(string.Format("Unable to parse value <{0}> as a color.", value));
 
                                     return -1;
                                 }
@@ -482,7 +498,7 @@ namespace ImageBox.CLI
                     }
                 case AppMode.Rotate:
                     {
-                        return Rotate(image, output, rotateAngle);
+                        return Rotate(image, output, rotateAngle, rotateColor);
                     }
                 case AppMode.Split:
                     {
@@ -502,7 +518,7 @@ namespace ImageBox.CLI
             return string.IsNullOrWhiteSpace(Path.GetDirectoryName(fileName)) ? Path.Combine(Environment.CurrentDirectory, fileName) : fileName;
         }
 
-        public static int Rotate(Image image, string output, float angle)
+        public static int Rotate(Image image, string output, float angle, System.Drawing.Color color)
         {
             if (string.IsNullOrWhiteSpace(output))
             {
@@ -529,7 +545,7 @@ namespace ImageBox.CLI
                 }
 
                 var outputFileName = imageFormatValue != default ? output : (output + ".bmp");
-                new Rotor(image).Rotate(angle).Save(outputFileName, imageFormatValue ?? ImageFormat.Bmp);
+                new Rotor(image).Rotate(angle, color).Save(outputFileName, imageFormatValue ?? ImageFormat.Bmp);
 
                 Console.WriteLine(string.Format("Image saved as <{0}>.", outputFileName));
             }
@@ -543,6 +559,7 @@ namespace ImageBox.CLI
 
             return 0;
         }
+
         public static int Split(Image image, string imageFileName, string output, ImageFormat format, Nullable<SplitUnitType> splitType, int? splitHorizontal, int? splitVertical)
         {
             if (string.IsNullOrWhiteSpace(output))
@@ -695,6 +712,35 @@ namespace ImageBox.CLI
             }
 
             return 0;
+        }
+
+        public static bool TryParseColor(string value, out System.Drawing.Color color)
+        {
+            if (value.StartsWith("#"))
+            {
+                // Example: #00ff0000
+                if (int.TryParse(value.Substring(1, value.Length - 1), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out var intHexValue))
+                {
+                    color = System.Drawing.Color.FromArgb(intHexValue);
+
+                    return true;
+                }
+            }
+
+            // Example: -65536
+            if (int.TryParse(value, out var intValue))
+            {
+                color = System.Drawing.Color.FromArgb(intValue);
+
+                return true;
+            }
+
+            // Example: Red
+            var property = typeof(Color).GetProperties(BindingFlags.Public | BindingFlags.Static).FirstOrDefault(p => p.Name.ToLowerInvariant() == value);
+
+            color = property == default ? System.Drawing.Color.Transparent : (Color)property.GetValue(default, default);
+
+            return property != default;
         }
 
         public static bool TryParseImageFormat(string format, out ImageFormat imageFormat)

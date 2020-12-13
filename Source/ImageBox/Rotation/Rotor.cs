@@ -13,12 +13,12 @@ namespace ImageBox.Rotation
 
         public virtual Image Image { get; protected set; }
 
-        public virtual Image Rotate(float theta)
+        public virtual Image Rotate(float angle, Color color)
         {
             var matrix = new Matrix();
 
             matrix.Translate(Image.Width / -2, Image.Height / -2, MatrixOrder.Append);
-            matrix.RotateAt(theta, new Point(0, 0), MatrixOrder.Append);
+            matrix.RotateAt(angle, new Point(0, 0), MatrixOrder.Append);
 
             using (var gp = new GraphicsPath())
             {  
@@ -34,6 +34,8 @@ namespace ImageBox.Rotation
 
                 using (var g = Graphics.FromImage(result))
                 {
+                    g.Clear(color);
+
                     var mDest = new Matrix();
                     mDest.Translate(result.Width / 2, result.Height / 2, MatrixOrder.Append);
 
