@@ -35,7 +35,7 @@ namespace ImageBox.UI.Windows
             this.CopyrightLabel = new System.Windows.Forms.Label();
             this.CopyrightValueLabel = new System.Windows.Forms.Label();
             this.WebSiteLabel = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.Licenselabel = new System.Windows.Forms.Label();
             this.WebSiteValueLinkLabel = new System.Windows.Forms.LinkLabel();
             this.MITLicenceLinkLabel = new System.Windows.Forms.LinkLabel();
             this.DescriptionLabel = new System.Windows.Forms.Label();
@@ -102,15 +102,15 @@ namespace ImageBox.UI.Windows
             this.WebSiteLabel.TabIndex = 5;
             this.WebSiteLabel.Text = "Web Site";
             // 
-            // label7
+            // Licenselabel
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(311, 83);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Licence";
+            this.Licenselabel.AutoSize = true;
+            this.Licenselabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Licenselabel.Location = new System.Drawing.Point(311, 83);
+            this.Licenselabel.Name = "Licenselabel";
+            this.Licenselabel.Size = new System.Drawing.Size(51, 13);
+            this.Licenselabel.TabIndex = 7;
+            this.Licenselabel.Text = "License";
             // 
             // WebSiteValueLinkLabel
             // 
@@ -160,7 +160,7 @@ namespace ImageBox.UI.Windows
             this.BottomPanel.BackColor = System.Drawing.SystemColors.Control;
             this.BottomPanel.Controls.Add(this.MITLicenceLinkLabel);
             this.BottomPanel.Controls.Add(this.WebSiteValueLinkLabel);
-            this.BottomPanel.Controls.Add(this.label7);
+            this.BottomPanel.Controls.Add(this.Licenselabel);
             this.BottomPanel.Controls.Add(this.WebSiteLabel);
             this.BottomPanel.Controls.Add(this.CopyrightValueLabel);
             this.BottomPanel.Controls.Add(this.CopyrightLabel);
@@ -204,7 +204,7 @@ namespace ImageBox.UI.Windows
         private System.Windows.Forms.Label CopyrightLabel;
         private System.Windows.Forms.Label CopyrightValueLabel;
         private System.Windows.Forms.Label WebSiteLabel;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label Licenselabel;
         private System.Windows.Forms.LinkLabel WebSiteValueLinkLabel;
         private System.Windows.Forms.LinkLabel MITLicenceLinkLabel;
         private System.Windows.Forms.Label DescriptionLabel;

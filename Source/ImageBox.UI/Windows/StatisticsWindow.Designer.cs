@@ -31,17 +31,20 @@ namespace ImageBox.UI.Windows
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StatisticsWindow));
             this.ImageBoxMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.imageBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImageBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.DragDropLabel = new System.Windows.Forms.Label();
             this.OriginalPictureBox = new System.Windows.Forms.PictureBox();
             this.MainTextBox = new System.Windows.Forms.TextBox();
             this.MainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.SaveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.MainSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.MainToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ImageBoxMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -49,44 +52,45 @@ namespace ImageBox.UI.Windows
             this.MainSplitContainer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).BeginInit();
             this.MainToolStrip.SuspendLayout();
+            this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ImageBoxMenuStrip
             // 
             this.ImageBoxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.imageBoxToolStripMenuItem});
+            this.ImageBoxToolStripMenuItem});
             this.ImageBoxMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.ImageBoxMenuStrip.Name = "ImageBoxMenuStrip";
             this.ImageBoxMenuStrip.Size = new System.Drawing.Size(784, 24);
             this.ImageBoxMenuStrip.TabIndex = 0;
             // 
-            // imageBoxToolStripMenuItem
+            // ImageBoxToolStripMenuItem
             // 
-            this.imageBoxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ImageBoxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.OpenToolStripMenuItem,
             this.MainToolStripSeparator,
             this.ExitToolStripMenuItem});
-            this.imageBoxToolStripMenuItem.Name = "imageBoxToolStripMenuItem";
-            this.imageBoxToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.imageBoxToolStripMenuItem.Text = "&ImageBox";
+            this.ImageBoxToolStripMenuItem.Name = "ImageBoxToolStripMenuItem";
+            this.ImageBoxToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.ImageBoxToolStripMenuItem.Text = "&ImageBox";
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.OpenFile_16x;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.OpenToolStripMenuItem.Text = "Open";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
             // MainToolStripSeparator
             // 
             this.MainToolStripSeparator.Name = "MainToolStripSeparator";
-            this.MainToolStripSeparator.Size = new System.Drawing.Size(100, 6);
+            this.MainToolStripSeparator.Size = new System.Drawing.Size(177, 6);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ExitToolStripMenuItem.Text = "E&xit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -102,15 +106,26 @@ namespace ImageBox.UI.Windows
             // 
             // MainSplitContainer.Panel1
             // 
+            this.MainSplitContainer.Panel1.Controls.Add(this.DragDropLabel);
             this.MainSplitContainer.Panel1.Controls.Add(this.OriginalPictureBox);
+            this.MainSplitContainer.Panel1.SizeChanged += new System.EventHandler(this.MainSplitContainerOriginalSizeChanged);
             // 
             // MainSplitContainer.Panel2
             // 
             this.MainSplitContainer.Panel2.Controls.Add(this.MainTextBox);
             this.MainSplitContainer.Panel2.Controls.Add(this.MainToolStrip);
-            this.MainSplitContainer.Size = new System.Drawing.Size(784, 538);
+            this.MainSplitContainer.Size = new System.Drawing.Size(784, 516);
             this.MainSplitContainer.SplitterDistance = 307;
             this.MainSplitContainer.TabIndex = 1;
+            // 
+            // DragDropLabel
+            // 
+            this.DragDropLabel.AutoSize = true;
+            this.DragDropLabel.Location = new System.Drawing.Point(60, 263);
+            this.DragDropLabel.Name = "DragDropLabel";
+            this.DragDropLabel.Size = new System.Drawing.Size(187, 13);
+            this.DragDropLabel.TabIndex = 3;
+            this.DragDropLabel.Text = "Open an image or Drag && Drop it here.";
             // 
             // OriginalPictureBox
             // 
@@ -118,7 +133,7 @@ namespace ImageBox.UI.Windows
             this.OriginalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OriginalPictureBox.Location = new System.Drawing.Point(0, 0);
             this.OriginalPictureBox.Name = "OriginalPictureBox";
-            this.OriginalPictureBox.Size = new System.Drawing.Size(307, 538);
+            this.OriginalPictureBox.Size = new System.Drawing.Size(307, 516);
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
@@ -131,7 +146,7 @@ namespace ImageBox.UI.Windows
             this.MainTextBox.Name = "MainTextBox";
             this.MainTextBox.ReadOnly = true;
             this.MainTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.MainTextBox.Size = new System.Drawing.Size(473, 513);
+            this.MainTextBox.Size = new System.Drawing.Size(473, 491);
             this.MainTextBox.TabIndex = 0;
             this.MainTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.MainTextBoxKeyUp);
             // 
@@ -139,32 +154,49 @@ namespace ImageBox.UI.Windows
             // 
             this.MainToolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.MainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
+            this.SaveToolStripButton});
             this.MainToolStrip.Location = new System.Drawing.Point(0, 0);
             this.MainToolStrip.Name = "MainToolStrip";
             this.MainToolStrip.Size = new System.Drawing.Size(473, 25);
             this.MainToolStrip.TabIndex = 1;
             // 
-            // toolStripButton1
+            // SaveToolStripButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = global::ImageBox.UI.Properties.Resources.Save_16x;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.SaveToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SaveToolStripButton.Image = global::ImageBox.UI.Properties.Resources.Save_16x;
+            this.SaveToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SaveToolStripButton.Name = "SaveToolStripButton";
+            this.SaveToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.SaveToolStripButton.Text = "Save";
+            this.SaveToolStripButton.Click += new System.EventHandler(this.SaveToolStripButtonClick);
             // 
             // MainSaveFileDialog
             // 
             this.MainSaveFileDialog.Filter = "Text|*.txt";
             // 
+            // MainStatusStrip
+            // 
+            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainToolStripStatusLabel});
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 540);
+            this.MainStatusStrip.Name = "MainStatusStrip";
+            this.MainStatusStrip.Size = new System.Drawing.Size(784, 22);
+            this.MainStatusStrip.TabIndex = 4;
+            this.MainStatusStrip.Text = "statusStrip1";
+            // 
+            // MainToolStripStatusLabel
+            // 
+            this.MainToolStripStatusLabel.Name = "MainToolStripStatusLabel";
+            this.MainToolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
             // StatisticsWindow
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.MainSplitContainer);
+            this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.ImageBoxMenuStrip);
             this.MainMenuStrip = this.ImageBoxMenuStrip;
             this.MinimumSize = new System.Drawing.Size(800, 600);
@@ -172,9 +204,12 @@ namespace ImageBox.UI.Windows
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ImageBox";
             this.Load += new System.EventHandler(this.StatisticsWindowLoad);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.StatisticsWindowDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.StatisticsWindowDragEnter);
             this.ImageBoxMenuStrip.ResumeLayout(false);
             this.ImageBoxMenuStrip.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
+            this.MainSplitContainer.Panel1.PerformLayout();
             this.MainSplitContainer.Panel2.ResumeLayout(false);
             this.MainSplitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
@@ -182,6 +217,8 @@ namespace ImageBox.UI.Windows
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).EndInit();
             this.MainToolStrip.ResumeLayout(false);
             this.MainToolStrip.PerformLayout();
+            this.MainStatusStrip.ResumeLayout(false);
+            this.MainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -190,7 +227,7 @@ namespace ImageBox.UI.Windows
         #endregion
 
         private System.Windows.Forms.MenuStrip ImageBoxMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem imageBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImageBoxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator MainToolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
@@ -199,7 +236,10 @@ namespace ImageBox.UI.Windows
         private System.Windows.Forms.PictureBox OriginalPictureBox;
         private System.Windows.Forms.TextBox MainTextBox;
         private System.Windows.Forms.ToolStrip MainToolStrip;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton SaveToolStripButton;
         private System.Windows.Forms.SaveFileDialog MainSaveFileDialog;
+        private System.Windows.Forms.StatusStrip MainStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel MainToolStripStatusLabel;
+        private System.Windows.Forms.Label DragDropLabel;
     }
 }

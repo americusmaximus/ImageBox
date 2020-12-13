@@ -58,16 +58,19 @@ namespace ImageBox.UI.Windows
             this.PresetTrackBar = new System.Windows.Forms.TrackBar();
             this.PresetComboBox = new System.Windows.Forms.ComboBox();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.DragDropLabel = new System.Windows.Forms.Label();
             this.OriginalPictureBox = new System.Windows.Forms.PictureBox();
             this.ModifiedPictureBox = new System.Windows.Forms.PictureBox();
             this.MainOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.ImageBoxMenuStrip = new System.Windows.Forms.MenuStrip();
-            this.imageBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ImageBoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.MainToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.MainPanel.SuspendLayout();
             this.CustomGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BlueTrackBar)).BeginInit();
@@ -88,6 +91,7 @@ namespace ImageBox.UI.Windows
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ModifiedPictureBox)).BeginInit();
             this.ImageBoxMenuStrip.SuspendLayout();
+            this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainPanel
@@ -95,7 +99,7 @@ namespace ImageBox.UI.Windows
             this.MainPanel.Controls.Add(this.CustomGroupBox);
             this.MainPanel.Controls.Add(this.PresetGroupBox);
             this.MainPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.MainPanel.Location = new System.Drawing.Point(0, 436);
+            this.MainPanel.Location = new System.Drawing.Point(0, 414);
             this.MainPanel.Name = "MainPanel";
             this.MainPanel.Size = new System.Drawing.Size(884, 126);
             this.MainPanel.TabIndex = 0;
@@ -378,14 +382,25 @@ namespace ImageBox.UI.Windows
             // 
             // MainSplitContainer.Panel1
             // 
+            this.MainSplitContainer.Panel1.Controls.Add(this.DragDropLabel);
             this.MainSplitContainer.Panel1.Controls.Add(this.OriginalPictureBox);
+            this.MainSplitContainer.Panel1.SizeChanged += new System.EventHandler(this.MainSplitContainerOriginalSizeChanged);
             // 
             // MainSplitContainer.Panel2
             // 
             this.MainSplitContainer.Panel2.Controls.Add(this.ModifiedPictureBox);
-            this.MainSplitContainer.Size = new System.Drawing.Size(884, 412);
+            this.MainSplitContainer.Size = new System.Drawing.Size(884, 390);
             this.MainSplitContainer.SplitterDistance = 442;
             this.MainSplitContainer.TabIndex = 1;
+            // 
+            // DragDropLabel
+            // 
+            this.DragDropLabel.AutoSize = true;
+            this.DragDropLabel.Location = new System.Drawing.Point(130, 188);
+            this.DragDropLabel.Name = "DragDropLabel";
+            this.DragDropLabel.Size = new System.Drawing.Size(187, 13);
+            this.DragDropLabel.TabIndex = 1;
+            this.DragDropLabel.Text = "Open an image or Drag && Drop it here.";
             // 
             // OriginalPictureBox
             // 
@@ -393,7 +408,7 @@ namespace ImageBox.UI.Windows
             this.OriginalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OriginalPictureBox.Location = new System.Drawing.Point(0, 0);
             this.OriginalPictureBox.Name = "OriginalPictureBox";
-            this.OriginalPictureBox.Size = new System.Drawing.Size(442, 412);
+            this.OriginalPictureBox.Size = new System.Drawing.Size(442, 390);
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
@@ -404,7 +419,7 @@ namespace ImageBox.UI.Windows
             this.ModifiedPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ModifiedPictureBox.Location = new System.Drawing.Point(0, 0);
             this.ModifiedPictureBox.Name = "ModifiedPictureBox";
-            this.ModifiedPictureBox.Size = new System.Drawing.Size(438, 412);
+            this.ModifiedPictureBox.Size = new System.Drawing.Size(438, 390);
             this.ModifiedPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.ModifiedPictureBox.TabIndex = 0;
             this.ModifiedPictureBox.TabStop = false;
@@ -416,68 +431,87 @@ namespace ImageBox.UI.Windows
             // ImageBoxMenuStrip
             // 
             this.ImageBoxMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.imageBoxToolStripMenuItem});
+            this.ImageBoxToolStripMenuItem});
             this.ImageBoxMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.ImageBoxMenuStrip.Name = "ImageBoxMenuStrip";
             this.ImageBoxMenuStrip.Size = new System.Drawing.Size(884, 24);
             this.ImageBoxMenuStrip.TabIndex = 2;
             // 
-            // imageBoxToolStripMenuItem
+            // ImageBoxToolStripMenuItem
             // 
-            this.imageBoxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
+            this.ImageBoxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.OpenToolStripMenuItem,
+            this.SaveToolStripMenuItem,
             this.MainToolStripSeparator,
-            this.exitToolStripMenuItem});
-            this.imageBoxToolStripMenuItem.Name = "imageBoxToolStripMenuItem";
-            this.imageBoxToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.imageBoxToolStripMenuItem.Text = "&ImageBox";
+            this.ExitToolStripMenuItem});
+            this.ImageBoxToolStripMenuItem.Name = "ImageBoxToolStripMenuItem";
+            this.ImageBoxToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.ImageBoxToolStripMenuItem.Text = "&ImageBox";
             // 
-            // openToolStripMenuItem
+            // OpenToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.OpenFile_16x;
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "&Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
+            this.OpenToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.OpenFile_16x;
+            this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.OpenToolStripMenuItem.Text = "&Open";
+            this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItemClick);
             // 
-            // saveToolStripMenuItem
+            // SaveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.ExportFile_16x;
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem.Text = "&Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
+            this.SaveToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.ExportFile_16x;
+            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.SaveToolStripMenuItem.Text = "&Save";
+            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItemClick);
             // 
             // MainToolStripSeparator
             // 
             this.MainToolStripSeparator.Name = "MainToolStripSeparator";
-            this.MainToolStripSeparator.Size = new System.Drawing.Size(100, 6);
+            this.MainToolStripSeparator.Size = new System.Drawing.Size(177, 6);
             // 
-            // exitToolStripMenuItem
+            // ExitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
+            this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitToolStripMenuItem.Text = "E&xit";
+            this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
             // MainSaveFileDialog
             // 
             this.MainSaveFileDialog.Filter = resources.GetString("MainSaveFileDialog.Filter");
             // 
+            // MainStatusStrip
+            // 
+            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainToolStripStatusLabel});
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 540);
+            this.MainStatusStrip.Name = "MainStatusStrip";
+            this.MainStatusStrip.Size = new System.Drawing.Size(884, 22);
+            this.MainStatusStrip.TabIndex = 3;
+            this.MainStatusStrip.Text = "statusStrip1";
+            // 
+            // MainToolStripStatusLabel
+            // 
+            this.MainToolStripStatusLabel.Name = "MainToolStripStatusLabel";
+            this.MainToolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
             // ColorWindow
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 562);
             this.Controls.Add(this.MainSplitContainer);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.ImageBoxMenuStrip);
+            this.Controls.Add(this.MainStatusStrip);
             this.MinimumSize = new System.Drawing.Size(900, 600);
             this.Name = "ColorWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ImageBox";
             this.Load += new System.EventHandler(this.ColoringWindowLoad);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.ColorWindowDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.ColorWindowDragEnter);
             this.MainPanel.ResumeLayout(false);
             this.CustomGroupBox.ResumeLayout(false);
             this.CustomGroupBox.PerformLayout();
@@ -494,6 +528,7 @@ namespace ImageBox.UI.Windows
             this.PresetGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PresetTrackBar)).EndInit();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
+            this.MainSplitContainer.Panel1.PerformLayout();
             this.MainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
             this.MainSplitContainer.ResumeLayout(false);
@@ -501,6 +536,8 @@ namespace ImageBox.UI.Windows
             ((System.ComponentModel.ISupportInitialize)(this.ModifiedPictureBox)).EndInit();
             this.ImageBoxMenuStrip.ResumeLayout(false);
             this.ImageBoxMenuStrip.PerformLayout();
+            this.MainStatusStrip.ResumeLayout(false);
+            this.MainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -514,11 +551,11 @@ namespace ImageBox.UI.Windows
         private System.Windows.Forms.PictureBox ModifiedPictureBox;
         private System.Windows.Forms.OpenFileDialog MainOpenFileDialog;
         private System.Windows.Forms.MenuStrip ImageBoxMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem imageBoxToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ImageBoxToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator MainToolStripSeparator;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
         private System.Windows.Forms.PictureBox RedPictureBox;
         private System.Windows.Forms.Label RedLabel;
         private System.Windows.Forms.PictureBox BluePictureBox;
@@ -546,5 +583,8 @@ namespace ImageBox.UI.Windows
         private System.Windows.Forms.Label PresetValueLabel;
         private System.Windows.Forms.TrackBar PresetTrackBar;
         private System.Windows.Forms.SaveFileDialog MainSaveFileDialog;
+        private System.Windows.Forms.StatusStrip MainStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel MainToolStripStatusLabel;
+        private System.Windows.Forms.Label DragDropLabel;
     }
 }

@@ -132,4 +132,7 @@
   <data name="MainSaveFileDialog.Filter" xml:space="preserve">
     <value>Bit Map|*.bmp|Enhanced Metafile|*.emf|Exchangeable Image File|*.exif|Graphics Interchanange Format|*.gif|Joint Photographic Experts Group|*.jpg;*.jpeg|Portable Network Graphics|*.png|Tagged Image File Format|*.tiff|Windows Icon Image|*.ico</value>
   </data>
+  <metadata name="MainStatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>500, 17</value>
+  </metadata>
 </root>

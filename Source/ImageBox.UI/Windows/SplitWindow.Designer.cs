@@ -38,8 +38,10 @@ namespace ImageBox.UI.Windows
             this.MainOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.MainFolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.DragDropLabel = new System.Windows.Forms.Label();
             this.OriginalPictureBox = new System.Windows.Forms.PictureBox();
             this.PartitioningGroupBox = new System.Windows.Forms.GroupBox();
+            this.ImageFormatComboBox = new System.Windows.Forms.ComboBox();
             this.SplitButton = new System.Windows.Forms.Button();
             this.VerticalPartsValueLabel = new System.Windows.Forms.Label();
             this.HorizontalPartsValueLabel = new System.Windows.Forms.Label();
@@ -52,7 +54,8 @@ namespace ImageBox.UI.Windows
             this.HeightLabel = new System.Windows.Forms.Label();
             this.WidthValueLabel = new System.Windows.Forms.Label();
             this.WidthLabel = new System.Windows.Forms.Label();
-            this.ImageFormatComboBox = new System.Windows.Forms.ComboBox();
+            this.MainStatusStrip = new System.Windows.Forms.StatusStrip();
+            this.MainToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ImageBoxMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
             this.MainSplitContainer.Panel1.SuspendLayout();
@@ -63,6 +66,7 @@ namespace ImageBox.UI.Windows
             ((System.ComponentModel.ISupportInitialize)(this.HeightNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).BeginInit();
             this.DimensionsGroupBox.SuspendLayout();
+            this.MainStatusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // ImageBoxMenuStrip
@@ -116,17 +120,28 @@ namespace ImageBox.UI.Windows
             // 
             // MainSplitContainer.Panel1
             // 
+            this.MainSplitContainer.Panel1.Controls.Add(this.DragDropLabel);
             this.MainSplitContainer.Panel1.Controls.Add(this.OriginalPictureBox);
             this.MainSplitContainer.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.MainSplitContainer.Panel1.SizeChanged += new System.EventHandler(this.MainSplitContainerOriginalSizeChanged);
             // 
             // MainSplitContainer.Panel2
             // 
             this.MainSplitContainer.Panel2.Controls.Add(this.PartitioningGroupBox);
             this.MainSplitContainer.Panel2.Controls.Add(this.DimensionsGroupBox);
             this.MainSplitContainer.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MainSplitContainer.Size = new System.Drawing.Size(784, 538);
+            this.MainSplitContainer.Size = new System.Drawing.Size(784, 516);
             this.MainSplitContainer.SplitterDistance = 261;
             this.MainSplitContainer.TabIndex = 1;
+            // 
+            // DragDropLabel
+            // 
+            this.DragDropLabel.AutoSize = true;
+            this.DragDropLabel.Location = new System.Drawing.Point(37, 263);
+            this.DragDropLabel.Name = "DragDropLabel";
+            this.DragDropLabel.Size = new System.Drawing.Size(187, 13);
+            this.DragDropLabel.TabIndex = 2;
+            this.DragDropLabel.Text = "Open an image or Drag && Drop it here.";
             // 
             // OriginalPictureBox
             // 
@@ -134,7 +149,7 @@ namespace ImageBox.UI.Windows
             this.OriginalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OriginalPictureBox.Location = new System.Drawing.Point(0, 0);
             this.OriginalPictureBox.Name = "OriginalPictureBox";
-            this.OriginalPictureBox.Size = new System.Drawing.Size(261, 538);
+            this.OriginalPictureBox.Size = new System.Drawing.Size(261, 516);
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
@@ -152,13 +167,25 @@ namespace ImageBox.UI.Windows
             this.PartitioningGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PartitioningGroupBox.Location = new System.Drawing.Point(0, 80);
             this.PartitioningGroupBox.Name = "PartitioningGroupBox";
-            this.PartitioningGroupBox.Size = new System.Drawing.Size(519, 458);
+            this.PartitioningGroupBox.Size = new System.Drawing.Size(519, 436);
             this.PartitioningGroupBox.TabIndex = 1;
             this.PartitioningGroupBox.TabStop = false;
             this.PartitioningGroupBox.Text = "Partitioning";
             // 
+            // ImageFormatComboBox
+            // 
+            this.ImageFormatComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ImageFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ImageFormatComboBox.Enabled = false;
+            this.ImageFormatComboBox.FormattingEnabled = true;
+            this.ImageFormatComboBox.Location = new System.Drawing.Point(381, 18);
+            this.ImageFormatComboBox.Name = "ImageFormatComboBox";
+            this.ImageFormatComboBox.Size = new System.Drawing.Size(126, 21);
+            this.ImageFormatComboBox.TabIndex = 7;
+            // 
             // SplitButton
             // 
+            this.SplitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SplitButton.Enabled = false;
             this.SplitButton.Location = new System.Drawing.Point(381, 42);
             this.SplitButton.Name = "SplitButton";
@@ -288,22 +315,29 @@ namespace ImageBox.UI.Windows
             this.WidthLabel.TabIndex = 0;
             this.WidthLabel.Text = "Width:";
             // 
-            // ImageFormatComboBox
+            // MainStatusStrip
             // 
-            this.ImageFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ImageFormatComboBox.Enabled = false;
-            this.ImageFormatComboBox.FormattingEnabled = true;
-            this.ImageFormatComboBox.Location = new System.Drawing.Point(381, 18);
-            this.ImageFormatComboBox.Name = "ImageFormatComboBox";
-            this.ImageFormatComboBox.Size = new System.Drawing.Size(126, 21);
-            this.ImageFormatComboBox.TabIndex = 7;
+            this.MainStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MainToolStripStatusLabel});
+            this.MainStatusStrip.Location = new System.Drawing.Point(0, 540);
+            this.MainStatusStrip.Name = "MainStatusStrip";
+            this.MainStatusStrip.Size = new System.Drawing.Size(784, 22);
+            this.MainStatusStrip.TabIndex = 4;
+            this.MainStatusStrip.Text = "statusStrip1";
+            // 
+            // MainToolStripStatusLabel
+            // 
+            this.MainToolStripStatusLabel.Name = "MainToolStripStatusLabel";
+            this.MainToolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // SplitWindow
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.MainSplitContainer);
+            this.Controls.Add(this.MainStatusStrip);
             this.Controls.Add(this.ImageBoxMenuStrip);
             this.MainMenuStrip = this.ImageBoxMenuStrip;
             this.MinimumSize = new System.Drawing.Size(800, 600);
@@ -311,9 +345,12 @@ namespace ImageBox.UI.Windows
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ImageBox";
             this.Load += new System.EventHandler(this.SplitWindowLoad);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.SplitWindowDragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.SplitWindowDragEnter);
             this.ImageBoxMenuStrip.ResumeLayout(false);
             this.ImageBoxMenuStrip.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
+            this.MainSplitContainer.Panel1.PerformLayout();
             this.MainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
             this.MainSplitContainer.ResumeLayout(false);
@@ -324,6 +361,8 @@ namespace ImageBox.UI.Windows
             ((System.ComponentModel.ISupportInitialize)(this.WidthNumericUpDown)).EndInit();
             this.DimensionsGroupBox.ResumeLayout(false);
             this.DimensionsGroupBox.PerformLayout();
+            this.MainStatusStrip.ResumeLayout(false);
+            this.MainStatusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,5 +393,8 @@ namespace ImageBox.UI.Windows
         private System.Windows.Forms.Label HorizontalPartsValueLabel;
         private System.Windows.Forms.Button SplitButton;
         private System.Windows.Forms.ComboBox ImageFormatComboBox;
+        private System.Windows.Forms.Label DragDropLabel;
+        private System.Windows.Forms.StatusStrip MainStatusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel MainToolStripStatusLabel;
     }
 }

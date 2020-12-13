@@ -153,6 +153,33 @@ namespace ImageBox.UI.Windows
             PresetComboBox.SelectedValueChanged += PresetComboBoxSelectedValueChanged;
         }
 
+        protected virtual void ColorWindowDragDrop(object sender, DragEventArgs e)
+        {
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (files != default && files.Length != 0)
+            {
+                try
+                {
+                    OriginalPictureBox.Image = Image.FromFile(files[0]);
+
+                    DragDropLabel.Visible = false;
+                    MainToolStripStatusLabel.Text = string.Format("File: {0} @ {1}x{2}", files[0], OriginalPictureBox.Image.Width, OriginalPictureBox.Image.Height);
+
+                    ApplyChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, ex.ToString(), "ImageBox", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        protected virtual void ColorWindowDragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
         protected virtual void ContrastTrackBarScroll(object sender, EventArgs e)
         {
             ContrastValueLabel.Text = ((float)ContrastTrackBar.Value / 100).ToString("F");
@@ -172,6 +199,11 @@ namespace ImageBox.UI.Windows
             ApplyChanges();
         }
 
+        protected virtual void MainSplitContainerOriginalSizeChanged(object sender, EventArgs e)
+        {
+            DragDropLabel.Location = new Point(MainSplitContainer.Panel1.Width / 2 - DragDropLabel.Width / 2, MainSplitContainer.Panel1.Height / 2 - DragDropLabel.Height / 2);
+        }
+
         protected virtual void OpenToolStripMenuItemClick(object sender, EventArgs e)
         {
             if (MainOpenFileDialog.ShowDialog(this) == DialogResult.OK)
@@ -179,6 +211,9 @@ namespace ImageBox.UI.Windows
                 try
                 {
                     OriginalPictureBox.Image = Image.FromFile(MainOpenFileDialog.FileName);
+
+                    DragDropLabel.Visible = false;
+                    MainToolStripStatusLabel.Text = string.Format("File: {0} @ {1}x{2}", MainOpenFileDialog.FileName, OriginalPictureBox.Image.Width, OriginalPictureBox.Image.Height);
 
                     ApplyChanges();
                 }
