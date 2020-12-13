@@ -67,17 +67,20 @@ ImageBox CLI on Windows 7
 Below is the output of running a help command
 >ImageBox.CLI.exe h
 
+##### angle
+[Rotate] A floating-point angle for the image rotation. Default value is <0> (zero).
+
 ##### format
-An output image(s) format for "Split" mode. Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG, TIFF, and WMF. Default value is BMP.
+[Split] An output image(s) format. Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG, TIFF, and WMF. Default value is BMP.
 
 ##### horizontal
-An integer positive number of horizontal units for image splitting in the "Split" mode. The value is required for the "Split" mode.
+[Split] A positive integer number of horizontal units for image splitting. The value is required for the "Split" mode.
 
 ##### image
 A path to the input image file. Image is a required parameter. Supported image formats are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG, TIFF, and WMF.
 
 ##### matrix
-A matrix type for the "Color" mode. Matrix is a required parameter for the "Color" mode. Possible values are:
+[Color] A matrix type the image coloring. Possible values:
 
 - Achromatomaly
 - Achromatopsia
@@ -110,23 +113,25 @@ A matrix type for the "Color" mode. Matrix is a required parameter for the "Colo
 - WhiteToAlpha
 
 ##### matrixvalue
-A matrix value floating point number parameter for some types of matrices in the "Color" mode. The parameter is optional, default value is going to be used if the value is not provided.
+[Color] A matrix value floating point number parameter for some types of matrices. The parameter is optional, default value is going to be used if the value is not provided.
 
 ##### mode
-A mode of ImageBox execution. Mode is a required parameter. Possible values are "Color", "Split", and "Stats".
+A mode of ImageBox execution. Mode is a required parameter. Possible values are "Color", "Rotate", "Split", "Stats".
 
 - "Color" mode allows the user to manipulate the input image colors.
-- "Split" mode allows the user to split the input image into a number of smaller images.
-- "Stats" mode analyzes the input image and produces color  statistics.
+- "Rotate" mode allows user to rotate the input image by a specified angle.
+-"Split" mode allows the user to split the input image into a number of smaller images.
+- "Stats" mode analyzes the input image and produces color statistics.
 
 ##### output
 A path to the output file, or an output directory for the "Split" mode.
 
 ##### unit
-An image split unit type for the "Split" mode. Possible values are "Pixel" and "Piece". Default value is "Pixel".
+[Split] An image split unit type. Possible values are "Pixel" and "Piece". Default value is "Pixel".
 
 ##### vertical
-An integer positive number of vertical units for image splitting in the "Split" mode. The value is required for the "Split" mode.
+An integer positive number of vertical units for image splitting. The value is required for the "Split" mode.
+
 
 #### Example
 The following command line produces an image shown below.

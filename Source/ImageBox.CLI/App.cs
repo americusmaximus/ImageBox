@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using ImageBox.Coloring;
+using ImageBox.Rotation;
 using ImageBox.Splitting;
 using ImageBox.Statistics;
 using System;
@@ -42,15 +43,16 @@ namespace ImageBox.CLI
     {
         static readonly Dictionary<string, string> Help = new Dictionary<string, string>()
         {
-            { "format",           "An output image(s) format for \"Split\" mode.\n                    Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG,\n                    TIFF, and WMF.\n                    Default value is BMP."},
-            { "horizontal",       "An integer positive number of horizontal units for image\n                    splitting in the \"Split\" mode.\n                    The value is required for the \"Split\" mode."},
+            { "angle",            "[Rotate] A floating-point angle for the image rotation.\n                    Default value is <0> (zero)." },
+            { "format",           "[Split] An output image(s) format.\n                    Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG,\n                    TIFF, and WMF.\n                    Default value is BMP."},
+            { "horizontal",       "[Split] A positive integer number of horizontal units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."},
             { "image",            "A path to the input image file.\n                    Image is a required parameter.\n                    Supported image formats are BMP, EMF, EXIF, GIF, ICON,\n                    JPEG, PNG, TIFF, and WMF." },
-            { "matrix",           "A matrix type for the \"Color\" mode.\n                    Matrix is a required parameter for the \"Color\" mode.\n                    Possible values are:\n                    \"Achromatomaly\",\n                    \"Achromatopsia\",\n                    \"AverageGrayScale\",\n                    \"BlackAndWhite\",\n                    \"Brightness\",    value range is \"-1\" to \"1\", default: \"0\",\n                    \"Cold\",\n                    \"Contrast\",       value range is \"0\" to \"2\", default: \"1\",\n                    \"Deuteranomaly\",\n                    \"Deuteranopia\",\n                    \"Exposure\",       value range is \"0\" to \"4\", default: \"1\",\n                    \"GrayScale\",\n                    \"Inverted\",\n                    \"LuminanceToAlpha\",\n                    \"Negavtive\",\n                    \"NightVision\",\n                    \"Normal\",\n                    \"Polaroid\",\n                    \"Protanomaly\",\n                    \"Protanopia\",\n                    \"RGBBGR\",\n                    \"Saturation\",     value range is \"0\" to \"4\", default: \"1\",\n                    \"Sepia\",\n                    \"Temperature\",    value range is \"0\" to \"4\", default: \"0\",\n                    \"Threshold\",      value range is \"0\" to \"4\", default: \"0\",\n                    \"Tint\",           value range is \"0\" to \"4\", default: \"0\",\n                    \"Tritanomaly\",\n                    \"Tritanopia\",\n                    \"Warm\",\n                    \"WhiteToAlpha\"."},
-            { "matrixvalue",      "A matrix value floating point number parameter for some\n                    types of matrices in the \"Color\" mode.\n                    The parameter is optional, default value is going to be\n                    used if the value is not provided." },
-            { "mode",             "A mode of ImageBox execution. Mode is a required parameter.\n                    Possible values are \"Color\", \"Split\", and \"Stats\".\n                    \"Color\" mode allows the user to manipulate the input image\n                    colors.\n                    \"Split\" mode allows the user to split the input image into\n                    a number of smaller images.\n                    \"Stats\" mode analyzes the input image and produces color\n                    statistics."},
+            { "matrix",           "[Color] A matrix type the image coloring. Possible values:\n                    \"Achromatomaly\",\n                    \"Achromatopsia\",\n                    \"AverageGrayScale\",\n                    \"BlackAndWhite\",\n                    \"Brightness\",    value range is \"-1\" to \"1\", default: \"0\",\n                    \"Cold\",\n                    \"Contrast\",       value range is \"0\" to \"2\", default: \"1\",\n                    \"Deuteranomaly\",\n                    \"Deuteranopia\",\n                    \"Exposure\",       value range is \"0\" to \"4\", default: \"1\",\n                    \"GrayScale\",\n                    \"Inverted\",\n                    \"LuminanceToAlpha\",\n                    \"Negavtive\",\n                    \"NightVision\",\n                    \"Normal\",\n                    \"Polaroid\",\n                    \"Protanomaly\",\n                    \"Protanopia\",\n                    \"RGBBGR\",\n                    \"Saturation\",     value range is \"0\" to \"4\", default: \"1\",\n                    \"Sepia\",\n                    \"Temperature\",    value range is \"0\" to \"4\", default: \"0\",\n                    \"Threshold\",      value range is \"0\" to \"4\", default: \"0\",\n                    \"Tint\",           value range is \"0\" to \"4\", default: \"0\",\n                    \"Tritanomaly\",\n                    \"Tritanopia\",\n                    \"Warm\",\n                    \"WhiteToAlpha\"."},
+            { "matrixvalue",      "[Color] A matrix value floating point number parameter for\n                    some types of matrices.\n                    The parameter is optional, default value is going to be\n                    used if the value is not provided." },
+            { "mode",             "A mode of ImageBox execution. Mode is a required parameter.\n                    Possible values are \"Color\", \"Rotate\", \"Split\", \"Stats\".\n\n                    \"Color\" mode allows the user to manipulate the input image\n                    colors.\n                    \"Rotate\" mode allows user to rotate the input image by\n                    a specified angle.\n                    \"Split\" mode allows the user to split the input image into\n                    a number of smaller images.\n                    \"Stats\" mode analyzes the input image and produces color\n                    statistics."},
             { "output",           "A path to the output file, or an output directory for\n                    the \"Split\" mode."},
-            { "unit",             "An image split unit type for the \"Split\" mode.\n                    Possible values are \"Pixel\" and \"Piece\".\n                    Default value is \"Pixel\"."},
-            { "vertical",         "An integer positive number of vertical units for image\n                    splitting in the \"Split\" mode.\n                    The value is required for the \"Split\" mode."}
+            { "unit",             "[Split] An image split unit type. \n                    Possible values are \"Pixel\" and \"Piece\".\n                    Default value is \"Pixel\"."},
+            { "vertical",         "[Split] An integer positive number of vertical units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."}
         };
 
         public static int Color(Image image, string output, Nullable<ColorerMatrixType> colorMatrixType, Nullable<float> colorMatrixValue)
@@ -318,6 +320,8 @@ namespace ImageBox.CLI
             var colorMatrixType = new Nullable<ColorerMatrixType>();
             var colorMatrixValue = new Nullable<float>();
 
+            var rotateAngle = 0.0f;
+
             var splitHorizontal = new Nullable<int>();
             var splitImageFormat = ImageFormat.Bmp;
             var splitUnitType = new Nullable<SplitUnitType>();
@@ -372,6 +376,28 @@ namespace ImageBox.CLI
                                 else
                                 {
                                     Console.WriteLine(string.Format("Unable to parse <0> as a floating point number. Using default value.", value));
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(string.Format("Parameter <{0}> is not suported in <1> mode.", key, appMode));
+                            }
+
+                            break;
+                        }
+                    case AppMode.Rotate:
+                        {
+                            if (key == "angle")
+                            {
+                                if (float.TryParse(value, out var floatValue))
+                                {
+                                    rotateAngle = floatValue;
+                                }
+                                else
+                                {
+                                    Console.WriteLine(string.Format("Unable to parse <0> as a floating point number.", value));
+
+                                    return -1;
                                 }
                             }
                             else
@@ -454,6 +480,10 @@ namespace ImageBox.CLI
                     {
                         return Color(image, output, colorMatrixType, colorMatrixValue);
                     }
+                case AppMode.Rotate:
+                    {
+                        return Rotate(image, output, rotateAngle);
+                    }
                 case AppMode.Split:
                     {
                         return Split(image, imageFileName, output, splitImageFormat, splitUnitType, splitHorizontal, splitVertical);
@@ -472,6 +502,47 @@ namespace ImageBox.CLI
             return string.IsNullOrWhiteSpace(Path.GetDirectoryName(fileName)) ? Path.Combine(Environment.CurrentDirectory, fileName) : fileName;
         }
 
+        public static int Rotate(Image image, string output, float angle)
+        {
+            if (string.IsNullOrWhiteSpace(output))
+            {
+                Console.WriteLine(string.Format("Output parameter is required in <{0}> mode. Please see help for details.", AppMode.Rotate));
+
+                return -1;
+            }
+
+            var directory = Path.GetDirectoryName(output);
+            if (!Directory.Exists(directory))
+            {
+                Console.WriteLine(string.Format("Directory <{0}> does not exists.", directory));
+
+                return -1;
+            }
+
+            try
+            {
+                var extension = Path.GetExtension(output).ToLowerInvariant().Replace(".", string.Empty);
+
+                if (!TryParseImageFormat(extension, out var imageFormatValue))
+                {
+                    Console.WriteLine(string.Format("Image extension <{0}> is not supported. Saving image as a BMP.", extension));
+                }
+
+                var outputFileName = imageFormatValue != default ? output : (output + ".bmp");
+                new Rotor(image).Rotate(angle).Save(outputFileName, imageFormatValue ?? ImageFormat.Bmp);
+
+                Console.WriteLine(string.Format("Image saved as <{0}>.", outputFileName));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Unable to save image as <{0}>. Please see the error below.", output));
+                Console.WriteLine(ex.ToString());
+
+                return -1;
+            }
+
+            return 0;
+        }
         public static int Split(Image image, string imageFileName, string output, ImageFormat format, Nullable<SplitUnitType> splitType, int? splitHorizontal, int? splitVertical)
         {
             if (string.IsNullOrWhiteSpace(output))

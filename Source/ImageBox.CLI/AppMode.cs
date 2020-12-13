@@ -28,8 +28,9 @@ namespace ImageBox.CLI
 {
     public enum AppMode
     {
-        Color,
-        Split,
-        Stats
+        Color = 0,
+        Rotate = 1,
+        Split = 2,
+        Stats = 3
     }
 }
