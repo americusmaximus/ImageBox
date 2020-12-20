@@ -24,14 +24,44 @@ SOFTWARE.
 */
 #endregion
 
-namespace ImageBox.CLI
+using System;
+using System.Drawing;
+
+namespace ImageBox.Flipping
 {
-    public enum AppMode
+    public class Flipper
     {
-        Color = 0,
-        Flip = 1,
-        Rotate = 2,
-        Split = 3,
-        Stats = 4
+        public Flipper(Image image)
+        {
+            Image = image ?? throw new ArgumentNullException(nameof(image));
+        }
+
+        public virtual Image Image { get; protected set; }
+
+        public virtual Image Flip(FlipType type)
+        {
+            var result = new Bitmap(Image);
+
+            switch (type)
+            {
+                case FlipType.Horizontal:
+                    {
+                        result.RotateFlip(RotateFlipType.RotateNoneFlipX);
+                        break;
+                    }
+                case FlipType.Vertical:
+                    {
+                        result.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        break;
+                    }
+                case FlipType.Both:
+                    {
+                        result.RotateFlip(RotateFlipType.RotateNoneFlipXY);
+                        break;
+                    }
+            }
+
+            return result;
+        }
     }
 }

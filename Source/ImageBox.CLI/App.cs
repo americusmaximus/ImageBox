@@ -25,6 +25,7 @@ SOFTWARE.
 #endregion
 
 using ImageBox.Coloring;
+using ImageBox.Flipping;
 using ImageBox.Rotation;
 using ImageBox.Splitting;
 using ImageBox.Statistics;
@@ -45,13 +46,14 @@ namespace ImageBox.CLI
         static readonly Dictionary<string, string> Help = new Dictionary<string, string>()
         {
             { "angle",            "[Rotate] A floating-point angle for the image rotation.\n                    Default value is <0> (zero)." },
+            { "axis",             "[Flip] An axis for the image flip.\n                    Possible values are \"None\", \"Horizontal\", \"Vertical\",\n                    and \"Both\".\n                    Default value is \"None\"." },
             { "color",            "[Rotate] A fill color. Color can be specified as a name,\n                    ARGB integer, or a HEX value.\n                    Example: \"red\", \"-65536\", \"#00ff0000\".\n                    Default value is \"Transparent\"."},
             { "format",           "[Split] An output image(s) format.\n                    Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG,\n                    TIFF, and WMF.\n                    Default value is BMP."},
             { "horizontal",       "[Split] A positive integer number of horizontal units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."},
             { "image",            "A path to the input image file.\n                    Image is a required parameter.\n                    Supported image formats are BMP, EMF, EXIF, GIF, ICON,\n                    JPEG, PNG, TIFF, and WMF." },
             { "matrix",           "[Color] A matrix type the image coloring. Possible values:\n                    \"Achromatomaly\",\n                    \"Achromatopsia\",\n                    \"AverageGrayScale\",\n                    \"BlackAndWhite\",\n                    \"Brightness\",    value range is \"-1\" to \"1\", default: \"0\",\n                    \"Cold\",\n                    \"Contrast\",       value range is \"0\" to \"2\", default: \"1\",\n                    \"Deuteranomaly\",\n                    \"Deuteranopia\",\n                    \"Exposure\",       value range is \"0\" to \"4\", default: \"1\",\n                    \"GrayScale\",\n                    \"Inverted\",\n                    \"LuminanceToAlpha\",\n                    \"Negavtive\",\n                    \"NightVision\",\n                    \"Normal\",\n                    \"Polaroid\",\n                    \"Protanomaly\",\n                    \"Protanopia\",\n                    \"RGBBGR\",\n                    \"Saturation\",     value range is \"0\" to \"4\", default: \"1\",\n                    \"Sepia\",\n                    \"Temperature\",    value range is \"0\" to \"4\", default: \"0\",\n                    \"Threshold\",      value range is \"0\" to \"4\", default: \"0\",\n                    \"Tint\",           value range is \"0\" to \"4\", default: \"0\",\n                    \"Tritanomaly\",\n                    \"Tritanopia\",\n                    \"Warm\",\n                    \"WhiteToAlpha\"."},
             { "matrixvalue",      "[Color] A matrix value floating point number parameter for\n                    some types of matrices.\n                    The parameter is optional, default value is going to be\n                    used if the value is not provided." },
-            { "mode",             "A mode of ImageBox execution. Mode is a required parameter.\n                    Possible values are \"Color\", \"Rotate\", \"Split\", \"Stats\".\n\n                    \"Color\" mode allows the user to manipulate the input image\n                    colors.\n                    \"Rotate\" mode allows user to rotate the input image by\n                    a specified angle.\n                    \"Split\" mode allows the user to split the input image into\n                    a number of smaller images.\n                    \"Stats\" mode analyzes the input image and produces color\n                    statistics."},
+            { "mode",             "A mode of ImageBox execution. Mode is a required parameter.\n                    Possible values are \"Color\", \"Flip\", \"Rotate\", \"Split\",\n                    and \"Stats\".\n\n                    \"Color\" mode allows the user to manipulate the input image\n                    colors.\n                    \"Flip\" mode allows the user to flip the image along the\n                    image axes.\n                    \"Rotate\" mode allows user to rotate the input image by\n                    a specified angle.\n                    \"Split\" mode allows the user to split the input image into\n                    a number of smaller images.\n                    \"Stats\" mode analyzes the input image and produces color\n                    statistics."},
             { "output",           "A path to the output file, or an output directory for\n                    the \"Split\" mode."},
             { "unit",             "[Split] An image split unit type. \n                    Possible values are \"Pixel\" and \"Piece\".\n                    Default value is \"Pixel\"."},
             { "vertical",         "[Split] An integer positive number of vertical units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."}
@@ -101,6 +103,48 @@ namespace ImageBox.CLI
 
                 var outputFileName = imageFormatValue != default ? output : (output + ".bmp");
                 new Colorer(image).Color(descriptor.Matrix).Save(outputFileName, imageFormatValue ?? ImageFormat.Bmp);
+
+                Console.WriteLine(string.Format("Image saved as <{0}>.", outputFileName));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(string.Format("Unable to save image as <{0}>. Please see the error below.", output));
+                Console.WriteLine(ex.ToString());
+
+                return -1;
+            }
+
+            return 0;
+        }
+
+        public static int Flip(Image image, string output, FlipType flipType)
+        {
+            if (string.IsNullOrWhiteSpace(output))
+            {
+                Console.WriteLine(string.Format("Output parameter is required in <{0}> mode. Please see help for details.", AppMode.Flip));
+
+                return -1;
+            }
+
+            var directory = Path.GetDirectoryName(output);
+            if (!Directory.Exists(directory))
+            {
+                Console.WriteLine(string.Format("Directory <{0}> does not exists.", directory));
+
+                return -1;
+            }
+
+            try
+            {
+                var extension = Path.GetExtension(output).ToLowerInvariant().Replace(".", string.Empty);
+
+                if (!TryParseImageFormat(extension, out var imageFormatValue))
+                {
+                    Console.WriteLine(string.Format("Image extension <{0}> is not supported. Saving image as a BMP.", extension));
+                }
+
+                var outputFileName = imageFormatValue != default ? output : (output + ".bmp");
+                new Flipper(image).Flip(flipType).Save(outputFileName, imageFormatValue ?? ImageFormat.Bmp);
 
                 Console.WriteLine(string.Format("Image saved as <{0}>.", outputFileName));
             }
@@ -322,6 +366,8 @@ namespace ImageBox.CLI
             var colorMatrixType = new Nullable<ColorerMatrixType>();
             var colorMatrixValue = new Nullable<float>();
 
+            var flipAxis = FlipType.None;
+
             var rotateAngle = 0.0f;
             var rotateColor = System.Drawing.Color.Transparent;
 
@@ -386,6 +432,25 @@ namespace ImageBox.CLI
                                 Console.WriteLine(string.Format("Parameter <{0}> is not suported in <1> mode.", key, appMode));
                             }
 
+                            break;
+                        }
+                    case AppMode.Flip:
+                        {
+                            if (key == "axis")
+                            {
+                                if (Enum.TryParse<FlipType>(value, out var flipTypeValue))
+                                {
+                                    flipAxis = flipTypeValue;
+                                }
+                                else
+                                {
+                                    Console.WriteLine(string.Format("Unable to parse <0> as a flip type. Using default value <{1}>.", value, FlipType.None));
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(string.Format("Parameter <{0}> is not suported in <1> mode.", key, appMode));
+                            }
                             break;
                         }
                     case AppMode.Rotate:
@@ -496,6 +561,10 @@ namespace ImageBox.CLI
                     {
                         return Color(image, output, colorMatrixType, colorMatrixValue);
                     }
+                case AppMode.Flip:
+                    {
+                        return Flip(image, output, flipAxis);
+                    }
                 case AppMode.Rotate:
                     {
                         return Rotate(image, output, rotateAngle, rotateColor);
@@ -518,7 +587,7 @@ namespace ImageBox.CLI
             return string.IsNullOrWhiteSpace(Path.GetDirectoryName(fileName)) ? Path.Combine(Environment.CurrentDirectory, fileName) : fileName;
         }
 
-        public static int Rotate(Image image, string output, float angle, System.Drawing.Color color)
+        public static int Rotate(Image image, string output, float angle, Color color)
         {
             if (string.IsNullOrWhiteSpace(output))
             {
@@ -622,7 +691,7 @@ namespace ImageBox.CLI
 
                     for (var y = 0; y < line.Length; y++)
                     {
-                        var fileName = Path.Combine(output, string.Format("{0}.{1:D4}.{2:D4}{3}", originalFileName, x, y, extension));
+                        var fileName = Path.Combine(output, string.Format("{0}.{1:D4}.{2:D4}{3}", originalFileName, y, x, extension));
 
                         line[y].Image.Save(fileName, format);
 

@@ -24,14 +24,13 @@ SOFTWARE.
 */
 #endregion
 
-namespace ImageBox.CLI
+namespace ImageBox.Flipping
 {
-    public enum AppMode
+    public enum FlipType
     {
-        Color = 0,
-        Flip = 1,
-        Rotate = 2,
-        Split = 3,
-        Stats = 4
+        None,
+        Horizontal,
+        Vertical,
+        Both
     }
 }

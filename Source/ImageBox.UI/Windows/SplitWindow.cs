@@ -147,9 +147,10 @@ namespace ImageBox.UI.Windows
 
                         for (var y = 0; y < line.Length; y++)
                         {
-                            var fileName = Path.Combine(MainFolderBrowserDialog.SelectedPath, string.Format("{0}.{1:D4}.{2:D4}.{3}", originalFileName, x, y, extension.Name.ToLowerInvariant()));
+                            var fileName = Path.Combine(MainFolderBrowserDialog.SelectedPath, string.Format("{0}.{1:D4}.{2:D4}.{3}", originalFileName, y, x, extension.Name.ToLowerInvariant()));
 
                             line[y].Image.Save(fileName, extension.Format);
+                            line[y].Image.Dispose();
                         }
                     }
                 }
