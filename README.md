@@ -70,6 +70,9 @@ Below is the output of running a help command
 ##### angle
 [Rotate] A floating-point angle for the image rotation. Default value is <0> (zero).
 
+##### axis
+[Flip] An axis for the image flip. Possible values are "None, "Horizontal", "Vertical", and "Both". Default values is "None".
+
 ##### color
 [Rotate] A fill color. Color can be specified as a name,  ARGB integer, or a HEX value. Example: "red", "-65536", "#00ff0000". Default value is "Transparent".
 
@@ -119,9 +122,10 @@ A path to the input image file. Image is a required parameter. Supported image f
 [Color] A matrix value floating point number parameter for some types of matrices. The parameter is optional, default value is going to be used if the value is not provided.
 
 ##### mode
-A mode of ImageBox execution. Mode is a required parameter. Possible values are "Color", "Rotate", "Split", "Stats".
+A mode of ImageBox execution. Mode is a required parameter. Possible values are "Color", "Flip", "Rotate", "Split", and "Stats".
 
 - "Color" mode allows the user to manipulate the input image colors.
+- "Flip" mode allows the user to flip the image along the image axes.
 - "Rotate" mode allows user to rotate the input image by a specified angle.
 -"Split" mode allows the user to split the input image into a number of smaller images.
 - "Stats" mode analyzes the input image and produces color statistics.
