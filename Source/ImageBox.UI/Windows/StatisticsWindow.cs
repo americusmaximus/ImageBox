@@ -52,6 +52,9 @@ namespace ImageBox.UI.Windows
 
             sb.AppendLine();
 
+            sb.AppendLine(string.Format("Gray Scale: {0}", result.IsGrayScale));
+            sb.AppendLine();
+
             for (var x = 0; x < result.Counts.Length; x++)
             {
                 var count = result.Counts[x];

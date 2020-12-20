@@ -48,6 +48,8 @@ namespace ImageBox.Statistics
             var brightest = Color.Black;
             var brightestValue = int.MinValue;
 
+            var isGrayScale = true;
+
             var pixels = new Dictionary<int, StatsCount>(Image.Width * Image.Height);
 
             using (var bitmap = new Bitmap(Image))
@@ -73,6 +75,12 @@ namespace ImageBox.Statistics
                             brightest = pixel;
                         }
 
+                        // GrayScale
+                        if (pixel.R != pixel.G && pixel.G != pixel.B && pixel.B != pixel.R)
+                        {
+                            isGrayScale = false;
+                        }
+
                         // Counting
                         var argb = pixel.ToArgb();
                         if (pixels.ContainsKey(argb))
@@ -91,7 +99,8 @@ namespace ImageBox.Statistics
             {
                 Brightest = brightest,
                 Counts = pixels.Values.OrderByDescending(p => p.Count).ToArray(),
-                Darkest = darkest
+                Darkest = darkest,
+                IsGrayScale = isGrayScale
             };
         }
 

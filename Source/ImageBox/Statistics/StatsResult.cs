@@ -35,5 +35,7 @@ namespace ImageBox.Statistics
         public virtual StatsCount[] Counts { get; set; }
 
         public virtual Color Darkest { get; set; }
+
+        public virtual bool IsGrayScale { get; set; }
     }
 }

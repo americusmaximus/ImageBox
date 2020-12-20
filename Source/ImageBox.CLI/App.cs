@@ -670,6 +670,7 @@ namespace ImageBox.CLI
 
                     var brightestText = Encoding.UTF8.GetBytes(string.Format("Brightest: R: {0,3}. G: {1,3}, B: {2,3}, A: {3,3}", result.Brightest.R, result.Brightest.G, result.Brightest.B, result.Brightest.A));
                     var darkestText = Encoding.UTF8.GetBytes(string.Format("Darkest:   R: {0,3}. G: {1,3}, B: {2,3}, A: {3,3}", result.Darkest.R, result.Darkest.G, result.Darkest.B, result.Darkest.A));
+                    var grayScaleText = Encoding.UTF8.GetBytes(string.Format("Gray Scale: {0}", result.IsGrayScale));
 
                     writer.Write(colorsCountText, 0, colorsCountText.Length);
                     writer.Write(newLineText, 0, newLineText.Length);
@@ -679,6 +680,10 @@ namespace ImageBox.CLI
                     writer.Write(newLineText, 0, newLineText.Length);
 
                     writer.Write(darkestText, 0, darkestText.Length);
+                    writer.Write(newLineText, 0, newLineText.Length);
+
+                    writer.Write(grayScaleText, 0, grayScaleText.Length);
+
                     writer.Write(newLineText, 0, newLineText.Length);
                     writer.Write(newLineText, 0, newLineText.Length);
 
