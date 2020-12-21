@@ -26,7 +26,7 @@ SOFTWARE.
 
 using ImageBox.Splitting;
 using ImageBox.UI.Properties;
-using ImageBox.UI.Windows.Split;
+using ImageBox.UI.Controls;
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;

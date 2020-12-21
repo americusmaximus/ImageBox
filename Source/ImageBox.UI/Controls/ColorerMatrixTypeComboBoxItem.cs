@@ -27,7 +27,7 @@ SOFTWARE.
 using ImageBox.Coloring;
 using System;
 
-namespace ImageBox.UI.Windows.Main
+namespace ImageBox.UI.Controls
 {
     public class ColorerMatrixTypeComboBoxItem
     {

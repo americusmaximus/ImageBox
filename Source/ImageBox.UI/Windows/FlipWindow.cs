@@ -24,7 +24,8 @@ SOFTWARE.
 */
 #endregion
 
-using ImageBox.Rotation;
+using ImageBox.Flipping;
+using ImageBox.UI.Controls;
 using ImageBox.UI.Properties;
 using System;
 using System.Drawing;
@@ -36,9 +37,9 @@ using System.Windows.Forms;
 
 namespace ImageBox.UI.Windows
 {
-    public partial class RotateWindow : Form
+    public partial class FlipWindow : Form
     {
-        public RotateWindow()
+        public FlipWindow()
         {
             InitializeComponent();
         }
@@ -55,43 +56,65 @@ namespace ImageBox.UI.Windows
             return imageFormat != default;
         }
 
-        protected virtual void AngleNumericUpDownValueChanged(object sender, EventArgs e)
-        {
-            ApplyChanges();
-        }
-
         protected virtual void ApplyChanges()
         {
             if (OriginalPictureBox.Image == default) { return; }
             
             ModifiedPictureBox.Image?.Dispose();
 
-            ModifiedPictureBox.Image = new Rotor(OriginalPictureBox.Image).Rotate((float)AngleNumericUpDown.Value, (Color)ColorPictureBox.Tag);
-        }
-
-        protected virtual void ColorPictureBoxClick(object sender, EventArgs e)
-        {
-            if (MainColorDialog.ShowDialog(this) == DialogResult.OK)
-            {
-                var image = new Bitmap(ColorPictureBox.Width, ColorPictureBox.Height);
-
-                using (var g = Graphics.FromImage(image))
-                {
-                    g.Clear(MainColorDialog.Color);
-                }
-
-                ColorPictureBox.Image?.Dispose();
-
-                ColorPictureBox.Tag = MainColorDialog.Color;
-                ColorPictureBox.Image = image;
-            }
-
-            ApplyChanges();
+            ModifiedPictureBox.Image = new Flipper(OriginalPictureBox.Image).Flip((FlipTypeComboBox.SelectedItem as FlipComboBoxItem).Type);
         }
 
         protected virtual void ExitToolStripMenuItemClick(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        protected virtual void FlipTypeComboBoxSelectedIndexChanged(object sender, EventArgs e)
+        {
+            ApplyChanges();
+        }
+
+        protected virtual void FlipWindowDragDrop(object sender, DragEventArgs e)
+        {
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            if (files != default && files.Length != 0)
+            {
+                try
+                {
+                    OriginalPictureBox.Image = Image.FromFile(files[0]);
+
+                    DragDropLabel.Visible = false;
+                    MainToolStripStatusLabel.Text = string.Format("File: {0} @ {1}x{2}", files[0], OriginalPictureBox.Image.Width, OriginalPictureBox.Image.Height);
+
+                    ApplyChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, ex.ToString(), "ImageBox", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        protected virtual void FlipWindowDragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
+        }
+
+        protected virtual void FlipWindowLoad(object sender, EventArgs e)
+        {
+            Icon = Resources.Icon;
+
+            FlipTypeComboBox.Items.AddRange(new[]
+            {
+                new FlipComboBoxItem(){Name = "None", Type = FlipType.None },
+                new FlipComboBoxItem(){Name = "Horizontal", Type = FlipType.Horizontal },
+                new FlipComboBoxItem(){Name = "Vertical", Type = FlipType.Vertical },
+                new FlipComboBoxItem(){Name = "Both", Type = FlipType.Both }
+            });
+
+            FlipTypeComboBox.SelectedIndex = 0;
         }
 
         protected virtual void MainSplitContainerOriginalSizeChanged(object sender, EventArgs e)
@@ -118,40 +141,6 @@ namespace ImageBox.UI.Windows
                 }
             }
         }
-
-        protected virtual void RotateWindowDragDrop(object sender, DragEventArgs e)
-        {
-            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
-            if (files != default && files.Length != 0)
-            {
-                try
-                {
-                    OriginalPictureBox.Image = Image.FromFile(files[0]);
-
-                    DragDropLabel.Visible = false;
-                    MainToolStripStatusLabel.Text = string.Format("File: {0} @ {1}x{2}", files[0], OriginalPictureBox.Image.Width, OriginalPictureBox.Image.Height);
-
-                    ApplyChanges();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, ex.ToString(), "ImageBox", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        protected virtual void RotateWindowDragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop)) e.Effect = DragDropEffects.Copy;
-        }
-
-        protected virtual void RotateWindowLoad(object sender, EventArgs e)
-        {
-            Icon = Resources.Icon;
-            ColorPictureBox.Tag = Color.Transparent;
-        }
-
         protected virtual void SaveToolStripMenuItemClick(object sender, EventArgs e)
         {
             if (ModifiedPictureBox.Image == default) { return; }

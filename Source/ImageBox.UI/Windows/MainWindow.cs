@@ -24,7 +24,7 @@ SOFTWARE.
 */
 #endregion
 
-using ImageBox.UI.Windows.Main;
+using ImageBox.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -56,6 +56,7 @@ namespace ImageBox.UI.Windows
             var components = new List<ButtonComponent>()
             {
                 new ButtonComponent() { Text = "Color an Image", Action = (s, ae) => { Hide();  using(var w = new ColorWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
+                new ButtonComponent() { Text = "Flip an Image", Action = (s, ae) => { Hide();  using(var w = new FlipWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
                 new ButtonComponent() { Text = "Split an Image", Action = (s, ae) => { Hide();  using(var w = new SplitWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
                 new ButtonComponent() { Text = "Rotate an Image", Action = (s, ae) => { Hide();  using(var w = new RotateWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } },
                 new ButtonComponent() { Text = "Image Statistics", Action = (s, ae) => { Hide();  using(var w = new StatisticsWindow()) { w.ShowDialog(this); } if(!IsDisposed) { Show(); } } }

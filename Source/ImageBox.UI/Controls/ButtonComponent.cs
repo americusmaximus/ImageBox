@@ -26,7 +26,7 @@ SOFTWARE.
 
 using System;
 
-namespace ImageBox.UI.Windows.Main
+namespace ImageBox.UI.Controls
 {
     public class ButtonComponent
     {

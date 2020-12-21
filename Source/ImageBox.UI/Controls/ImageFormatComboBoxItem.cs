@@ -26,7 +26,7 @@ SOFTWARE.
 
 using System.Drawing.Imaging;
 
-namespace ImageBox.UI.Windows.Split
+namespace ImageBox.UI.Controls
 {
     public class ImageFormatComboBoxItem
     {

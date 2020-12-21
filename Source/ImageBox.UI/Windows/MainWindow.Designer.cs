@@ -63,7 +63,7 @@ namespace ImageBox.UI.Windows
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(92, 22);
             this.ExitToolStripMenuItem.Text = "E&xit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItemClick);
             // 
@@ -82,7 +82,7 @@ namespace ImageBox.UI.Windows
             // 
             this.VisitWebsiteToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.Web_16x;
             this.VisitWebsiteToolStripMenuItem.Name = "VisitWebsiteToolStripMenuItem";
-            this.VisitWebsiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.VisitWebsiteToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.VisitWebsiteToolStripMenuItem.Text = "Visit &Website";
             this.VisitWebsiteToolStripMenuItem.Click += new System.EventHandler(this.VisitWebsiteToolStripMenuItemClick);
             // 
@@ -90,20 +90,20 @@ namespace ImageBox.UI.Windows
             // 
             this.ReportAnIssueToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.Bug_16x;
             this.ReportAnIssueToolStripMenuItem.Name = "ReportAnIssueToolStripMenuItem";
-            this.ReportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ReportAnIssueToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.ReportAnIssueToolStripMenuItem.Text = "Report an &Issue";
             this.ReportAnIssueToolStripMenuItem.Click += new System.EventHandler(this.ReportAnIssueToolStripMenuItemClick);
             // 
             // ToolStripSeparatorOne
             // 
             this.ToolStripSeparatorOne.Name = "ToolStripSeparatorOne";
-            this.ToolStripSeparatorOne.Size = new System.Drawing.Size(177, 6);
+            this.ToolStripSeparatorOne.Size = new System.Drawing.Size(151, 6);
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Image = global::ImageBox.UI.Properties.Resources.Favorite_16x;
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.AboutToolStripMenuItem.Text = "&About";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItemClick);
             // 
@@ -115,9 +115,10 @@ namespace ImageBox.UI.Windows
             this.MainTableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainTableLayoutPanel.Location = new System.Drawing.Point(0, 24);
             this.MainTableLayoutPanel.Name = "MainTableLayoutPanel";
-            this.MainTableLayoutPanel.RowCount = 2;
-            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.MainTableLayoutPanel.RowCount = 3;
+            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.MainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.MainTableLayoutPanel.Size = new System.Drawing.Size(784, 538);
             this.MainTableLayoutPanel.TabIndex = 1;
             // 

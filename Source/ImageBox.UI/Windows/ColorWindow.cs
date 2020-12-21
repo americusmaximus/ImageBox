@@ -26,7 +26,7 @@ SOFTWARE.
 
 using ImageBox.Coloring;
 using ImageBox.UI.Properties;
-using ImageBox.UI.Windows.Main;
+using ImageBox.UI.Controls;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
