@@ -120,24 +120,25 @@ namespace ImageBox.UI.Windows
             // 
             // MainSplitContainer.Panel1
             // 
-            this.MainSplitContainer.Panel1.Controls.Add(this.DragDropLabel);
-            this.MainSplitContainer.Panel1.Controls.Add(this.OriginalPictureBox);
+            this.MainSplitContainer.Panel1.Controls.Add(this.PartitioningGroupBox);
+            this.MainSplitContainer.Panel1.Controls.Add(this.DimensionsGroupBox);
             this.MainSplitContainer.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.MainSplitContainer.Panel1.SizeChanged += new System.EventHandler(this.MainSplitContainerOriginalSizeChanged);
+            this.MainSplitContainer.Panel1MinSize = 200;
             // 
             // MainSplitContainer.Panel2
             // 
-            this.MainSplitContainer.Panel2.Controls.Add(this.PartitioningGroupBox);
-            this.MainSplitContainer.Panel2.Controls.Add(this.DimensionsGroupBox);
+            this.MainSplitContainer.Panel2.Controls.Add(this.DragDropLabel);
+            this.MainSplitContainer.Panel2.Controls.Add(this.OriginalPictureBox);
             this.MainSplitContainer.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.MainSplitContainer.Size = new System.Drawing.Size(784, 516);
-            this.MainSplitContainer.SplitterDistance = 261;
+            this.MainSplitContainer.SplitterDistance = 200;
             this.MainSplitContainer.TabIndex = 1;
             // 
             // DragDropLabel
             // 
             this.DragDropLabel.AutoSize = true;
-            this.DragDropLabel.Location = new System.Drawing.Point(37, 263);
+            this.DragDropLabel.Location = new System.Drawing.Point(184, 251);
             this.DragDropLabel.Name = "DragDropLabel";
             this.DragDropLabel.Size = new System.Drawing.Size(187, 13);
             this.DragDropLabel.TabIndex = 2;
@@ -149,7 +150,7 @@ namespace ImageBox.UI.Windows
             this.OriginalPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.OriginalPictureBox.Location = new System.Drawing.Point(0, 0);
             this.OriginalPictureBox.Name = "OriginalPictureBox";
-            this.OriginalPictureBox.Size = new System.Drawing.Size(261, 516);
+            this.OriginalPictureBox.Size = new System.Drawing.Size(580, 516);
             this.OriginalPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.OriginalPictureBox.TabIndex = 0;
             this.OriginalPictureBox.TabStop = false;
@@ -165,31 +166,29 @@ namespace ImageBox.UI.Windows
             this.PartitioningGroupBox.Controls.Add(this.PartitioningHeightLabel);
             this.PartitioningGroupBox.Controls.Add(this.PartitioningWidthLabel);
             this.PartitioningGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PartitioningGroupBox.Location = new System.Drawing.Point(0, 80);
+            this.PartitioningGroupBox.Location = new System.Drawing.Point(0, 74);
             this.PartitioningGroupBox.Name = "PartitioningGroupBox";
-            this.PartitioningGroupBox.Size = new System.Drawing.Size(519, 436);
+            this.PartitioningGroupBox.Size = new System.Drawing.Size(200, 442);
             this.PartitioningGroupBox.TabIndex = 1;
             this.PartitioningGroupBox.TabStop = false;
             this.PartitioningGroupBox.Text = "Partitioning";
             // 
             // ImageFormatComboBox
             // 
-            this.ImageFormatComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ImageFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ImageFormatComboBox.Enabled = false;
             this.ImageFormatComboBox.FormattingEnabled = true;
-            this.ImageFormatComboBox.Location = new System.Drawing.Point(381, 18);
+            this.ImageFormatComboBox.Location = new System.Drawing.Point(9, 71);
             this.ImageFormatComboBox.Name = "ImageFormatComboBox";
-            this.ImageFormatComboBox.Size = new System.Drawing.Size(126, 21);
+            this.ImageFormatComboBox.Size = new System.Drawing.Size(124, 21);
             this.ImageFormatComboBox.TabIndex = 7;
             // 
             // SplitButton
             // 
-            this.SplitButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SplitButton.Enabled = false;
-            this.SplitButton.Location = new System.Drawing.Point(381, 42);
+            this.SplitButton.Location = new System.Drawing.Point(9, 98);
             this.SplitButton.Name = "SplitButton";
-            this.SplitButton.Size = new System.Drawing.Size(126, 23);
+            this.SplitButton.Size = new System.Drawing.Size(124, 23);
             this.SplitButton.TabIndex = 6;
             this.SplitButton.Text = "Split!";
             this.SplitButton.UseVisualStyleBackColor = true;
@@ -198,7 +197,7 @@ namespace ImageBox.UI.Windows
             // VerticalPartsValueLabel
             // 
             this.VerticalPartsValueLabel.AutoSize = true;
-            this.VerticalPartsValueLabel.Location = new System.Drawing.Point(152, 47);
+            this.VerticalPartsValueLabel.Location = new System.Drawing.Point(139, 47);
             this.VerticalPartsValueLabel.Name = "VerticalPartsValueLabel";
             this.VerticalPartsValueLabel.Size = new System.Drawing.Size(0, 13);
             this.VerticalPartsValueLabel.TabIndex = 5;
@@ -206,7 +205,7 @@ namespace ImageBox.UI.Windows
             // HorizontalPartsValueLabel
             // 
             this.HorizontalPartsValueLabel.AutoSize = true;
-            this.HorizontalPartsValueLabel.Location = new System.Drawing.Point(152, 21);
+            this.HorizontalPartsValueLabel.Location = new System.Drawing.Point(139, 21);
             this.HorizontalPartsValueLabel.Name = "HorizontalPartsValueLabel";
             this.HorizontalPartsValueLabel.Size = new System.Drawing.Size(0, 13);
             this.HorizontalPartsValueLabel.TabIndex = 4;
@@ -221,7 +220,7 @@ namespace ImageBox.UI.Windows
             0,
             0});
             this.HeightNumericUpDown.Name = "HeightNumericUpDown";
-            this.HeightNumericUpDown.Size = new System.Drawing.Size(90, 20);
+            this.HeightNumericUpDown.Size = new System.Drawing.Size(77, 20);
             this.HeightNumericUpDown.TabIndex = 3;
             this.HeightNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -240,7 +239,7 @@ namespace ImageBox.UI.Windows
             0,
             0});
             this.WidthNumericUpDown.Name = "WidthNumericUpDown";
-            this.WidthNumericUpDown.Size = new System.Drawing.Size(90, 20);
+            this.WidthNumericUpDown.Size = new System.Drawing.Size(77, 20);
             this.WidthNumericUpDown.TabIndex = 2;
             this.WidthNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -276,7 +275,7 @@ namespace ImageBox.UI.Windows
             this.DimensionsGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.DimensionsGroupBox.Location = new System.Drawing.Point(0, 0);
             this.DimensionsGroupBox.Name = "DimensionsGroupBox";
-            this.DimensionsGroupBox.Size = new System.Drawing.Size(519, 80);
+            this.DimensionsGroupBox.Size = new System.Drawing.Size(200, 74);
             this.DimensionsGroupBox.TabIndex = 0;
             this.DimensionsGroupBox.TabStop = false;
             this.DimensionsGroupBox.Text = "Dimensions";
@@ -350,8 +349,8 @@ namespace ImageBox.UI.Windows
             this.ImageBoxMenuStrip.ResumeLayout(false);
             this.ImageBoxMenuStrip.PerformLayout();
             this.MainSplitContainer.Panel1.ResumeLayout(false);
-            this.MainSplitContainer.Panel1.PerformLayout();
             this.MainSplitContainer.Panel2.ResumeLayout(false);
+            this.MainSplitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
             this.MainSplitContainer.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.OriginalPictureBox)).EndInit();
