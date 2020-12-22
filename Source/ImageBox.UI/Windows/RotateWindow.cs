@@ -43,18 +43,6 @@ namespace ImageBox.UI.Windows
             InitializeComponent();
         }
 
-        protected static bool TryParseImageFormat(string format, out ImageFormat imageFormat)
-        {
-            var extension = format.ToLowerInvariant().Replace("ico", "icon").Replace("jpg", "jpeg").Replace("tif", "tiff");
-
-            var imageFormatProperty = typeof(ImageFormat).GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.GetProperty)
-                                                            .FirstOrDefault(p => p.Name.ToLowerInvariant() == extension);
-
-            imageFormat = imageFormatProperty == default ? default : (ImageFormat)imageFormatProperty.GetValue(default, default);
-
-            return imageFormat != default;
-        }
-
         protected virtual void AngleNumericUpDownValueChanged(object sender, EventArgs e)
         {
             ApplyChanges();
@@ -63,7 +51,7 @@ namespace ImageBox.UI.Windows
         protected virtual void ApplyChanges()
         {
             if (OriginalPictureBox.Image == default) { return; }
-            
+
             ModifiedPictureBox.Image?.Dispose();
 
             ModifiedPictureBox.Image = new Rotor(OriginalPictureBox.Image).Rotate((float)AngleNumericUpDown.Value, (Color)ColorPictureBox.Tag);
@@ -162,7 +150,7 @@ namespace ImageBox.UI.Windows
 
                 if (!TryParseImageFormat(extension, out var imageFormatValue))
                 {
-                    Console.WriteLine(string.Format("Image extension <{0}> is not supported. Saving image as a BMP.", extension));
+                    MessageBox.Show(this, string.Format("Image extension <{0}> is not supported. Saving image as a BMP.", extension), "ImageBox", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 var outputFileName = imageFormatValue != default ? MainSaveFileDialog.FileName : (MainSaveFileDialog.FileName + ".bmp");
@@ -176,6 +164,18 @@ namespace ImageBox.UI.Windows
                     MessageBox.Show(this, ex.ToString(), "ImageBox", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        protected virtual bool TryParseImageFormat(string format, out ImageFormat imageFormat)
+        {
+            var extension = format.ToLowerInvariant().Replace("ico", "icon").Replace("jpg", "jpeg").Replace("tif", "tiff");
+
+            var imageFormatProperty = typeof(ImageFormat).GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.GetProperty)
+                                                            .FirstOrDefault(p => p.Name.ToLowerInvariant() == extension);
+
+            imageFormat = imageFormatProperty == default ? default : (ImageFormat)imageFormatProperty.GetValue(default, default);
+
+            return imageFormat != default;
         }
     }
 }
