@@ -68,14 +68,15 @@ namespace ImageBox.Splitting
             var horizontalCount = (int)Math.Ceiling((float)Image.Width / width);
             var verticalCount = (int)Math.Ceiling((float)Image.Height / height);
 
-            var result = new SplitterResult[verticalCount][];
+            var result = new SplitterResult[horizontalCount][];
 
             for (int x = 0; x < horizontalCount; x++)
             {
-                result[x] = new SplitterResult[horizontalCount];
+                result[x] = new SplitterResult[verticalCount];
 
                 for (int y = 0; y < verticalCount; y++)
                 {
+
                     var bitmap = new Bitmap(width, height);
 
                     using (var g = Graphics.FromImage(bitmap))
