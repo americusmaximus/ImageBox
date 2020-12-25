@@ -315,7 +315,7 @@ namespace ImageBox.CLI
 
                 if (!File.Exists(normalizedPath))
                 {
-                    Console.WriteLine(string.Format("Image file <0> not found.", normalizedPath));
+                    Console.WriteLine(string.Format("Image file <{0}> not found.", normalizedPath));
 
                     return -1;
                 }
@@ -327,7 +327,7 @@ namespace ImageBox.CLI
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(string.Format("Unable to load image <0>.", normalizedPath));
+                    Console.WriteLine(string.Format("Unable to load image <{0}>.", normalizedPath));
                     Console.WriteLine(ex.ToString());
 
                     return -1;
