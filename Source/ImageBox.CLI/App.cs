@@ -210,7 +210,7 @@ namespace ImageBox.CLI
                 return 0;
             }
 
-            // Help is a second highest priority.
+            // Help is a second highest priority
             if (parameters.Any(a => a.ToLowerInvariant() == "h") || parameters.Any(a => a.ToLowerInvariant() == "help"))
             {
                 Console.WriteLine("Help:");
