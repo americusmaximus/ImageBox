@@ -134,10 +134,10 @@ A mode of ImageBox execution. Mode is a required parameter. Possible values are 
 A path to the output file, or an output directory for the "Split" mode.
 
 ##### unit
-[Split] An image split unit type. Possible values are "Pixel" and "Piece". Default value is "Pixel".
+[Split] An image split type. Possible values are "Pixel" and "Piece". Default value is "Pixel".
 
 ##### vertical
-An integer positive number of vertical units for image splitting. The value is required for the "Split" mode.
+A positive integer number of vertical units for image splitting. The value is required for the "Split" mode.
 
 
 #### Example
