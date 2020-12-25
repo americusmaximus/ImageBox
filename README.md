@@ -42,7 +42,7 @@ To publish the code you always have to specify the target framework since `dotne
 #### CLI
 Please see the CLI section of building the code under Windows.
 #### Dependencies
-.Net on Linux depends on `libgdiplus` for font rasterization.
+.Net on Linux depends on `libgdiplus` for image manipulation.
 
 In case you see errors mentioning the following:
 
