@@ -41,6 +41,7 @@ To publish the code you always have to specify the target framework since `dotne
 ### Linux
 #### CLI
 Please see the CLI section of building the code under Windows.
+
 #### Dependencies
 .Net on Linux depends on `libgdiplus` for image manipulation.
 
@@ -62,7 +63,6 @@ you have to install libgdiplus library on your computer, which you can do by exe
 ImageBox CLI on Windows 7
 
 ![ImageBox CLI on Windows 7](https://github.com/americusmaximus/ImageBox/blob/main/Docs/ImageBox.CLI.Win.7.png)
-
 
 Below is the output of running a help command
 >ImageBox.CLI.exe h
@@ -148,7 +148,6 @@ The following command line produces an image shown below.
 Resulting image:
 
 ![Example of contrast modification image with ImageBox](https://github.com/americusmaximus/ImageBox/blob/main/Docs/Unsplash.Contrast.1.3.png)
-
 
 #### UI
 ImageBox UI runs on Windows exclusively. It allows for easy and dynamic preview when applicable, as well as ease of use without a need to remember CLI options.
