@@ -55,8 +55,8 @@ namespace ImageBox.CLI
             { "matrixvalue",      "[Color] A matrix value floating point number parameter for\n                    some types of matrices.\n                    The parameter is optional, default value is going to be\n                    used if the value is not provided." },
             { "mode",             "A mode of ImageBox execution. Mode is a required parameter.\n                    Possible values are \"Color\", \"Flip\", \"Rotate\", \"Split\",\n                    and \"Stats\".\n\n                    \"Color\" mode allows the user to manipulate the input image\n                    colors.\n                    \"Flip\" mode allows the user to flip the image along the\n                    image axes.\n                    \"Rotate\" mode allows user to rotate the input image by\n                    a specified angle.\n                    \"Split\" mode allows the user to split the input image into\n                    a number of smaller images.\n                    \"Stats\" mode analyzes the input image and produces color\n                    statistics."},
             { "output",           "A path to the output file, or an output directory for\n                    the \"Split\" mode."},
-            { "unit",             "[Split] An image split unit type. \n                    Possible values are \"Pixel\" and \"Piece\".\n                    Default value is \"Pixel\"."},
-            { "vertical",         "[Split] An integer positive number of vertical units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."}
+            { "unit",             "[Split] An image split type. \n                    Possible values are \"Pixel\" and \"Piece\".\n                    Default value is \"Pixel\"."},
+            { "vertical",         "[Split] A positive integer number of vertical units for\n                    image splitting.\n                    The value is required for the \"Split\" mode."}
         };
 
         public static int Color(Image image, string output, Nullable<ColorerMatrixType> colorMatrixType, Nullable<float> colorMatrixValue)
