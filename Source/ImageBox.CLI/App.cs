@@ -373,7 +373,7 @@ namespace ImageBox.CLI
 
             var splitHorizontal = new Nullable<int>();
             var splitImageFormat = ImageFormat.Bmp;
-            var splitUnitType = new Nullable<SplitUnitType>();
+            var splitUnitType = new Nullable<SplitType>();
             var splitVertical = new Nullable<int>();
 
             foreach (var p in parameters)
@@ -444,7 +444,7 @@ namespace ImageBox.CLI
                                 }
                                 else
                                 {
-                                    Console.WriteLine(string.Format("Unable to parse <0> as a flip type. Using default value <{1}>.", value, FlipType.None));
+                                    Console.WriteLine(string.Format("Unable to parse <0> as a flip value. Using default value <{1}>.", value, FlipType.None));
                                 }
                             }
                             else
@@ -492,13 +492,13 @@ namespace ImageBox.CLI
                         {
                             if (key == "unit")
                             {
-                                if (Enum.TryParse<SplitUnitType>(value, true, out var splitUnitTypeValue))
+                                if (Enum.TryParse<SplitType>(value, true, out var splitUnitTypeValue))
                                 {
                                     splitUnitType = splitUnitTypeValue;
                                 }
                                 else
                                 {
-                                    Console.WriteLine(string.Format("Unable to parse <0> as a split type. Using default value <{1}>.", value, SplitUnitType.Pixel));
+                                    Console.WriteLine(string.Format("Unable to parse <0> as a split value. Using default value <{1}>.", value, SplitType.Pixel));
                                 }
                             }
                             else if (key == "horizontal")
@@ -629,7 +629,7 @@ namespace ImageBox.CLI
             return 0;
         }
 
-        public static int Split(Image image, string imageFileName, string output, ImageFormat format, Nullable<SplitUnitType> splitType, int? splitHorizontal, int? splitVertical)
+        public static int Split(Image image, string imageFileName, string output, ImageFormat format, Nullable<SplitType> splitType, int? splitHorizontal, int? splitVertical)
         {
             if (string.IsNullOrWhiteSpace(output))
             {
@@ -665,7 +665,7 @@ namespace ImageBox.CLI
             {
                 result = new Splitter(image).Split(new SplitterRequest()
                 {
-                    Type = splitType.HasValue ? splitType.Value : SplitUnitType.Pixel,
+                    Type = splitType.HasValue ? splitType.Value : SplitType.Pixel,
                     Horizontal = splitHorizontal.Value,
                     Vertical = splitVertical.Value
                 });

@@ -42,7 +42,7 @@ namespace ImageBox.Splitting
         {
             if (request == default) { throw new ArgumentNullException(nameof(request)); }
 
-            if (request.Type == SplitUnitType.Piece)
+            if (request.Type == SplitType.Piece)
             {
                 if (request.Horizontal <= 0) { throw new ArgumentOutOfRangeException(nameof(request.Horizontal), "Width has to be a positive number."); }
                 if (request.Vertical <= 0) { throw new ArgumentOutOfRangeException(nameof(request.Vertical), "Height has to be a positive number."); }

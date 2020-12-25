@@ -30,7 +30,7 @@ namespace ImageBox.Splitting
     {
         public virtual int Horizontal { get; set; }
 
-        public virtual SplitUnitType Type { get; set; }
+        public virtual SplitType Type { get; set; }
 
         public virtual int Vertical { get; set; }
 

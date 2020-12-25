@@ -26,7 +26,7 @@ SOFTWARE.
 
 namespace ImageBox.Splitting
 {
-    public enum SplitUnitType
+    public enum SplitType
     {
         Piece = 0,
         Pixel = 1,

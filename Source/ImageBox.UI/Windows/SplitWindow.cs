@@ -133,7 +133,7 @@ namespace ImageBox.UI.Windows
                 {
                     var result = new Splitter(OriginalPictureBox.Image).Split(new SplitterRequest()
                     {
-                        Type = SplitUnitType.Pixel,
+                        Type = SplitType.Pixel,
                         Horizontal = (int)WidthNumericUpDown.Value,
                         Vertical = (int)HeightNumericUpDown.Value
                     });
