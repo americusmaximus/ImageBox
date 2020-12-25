@@ -160,6 +160,7 @@ ImageBox on Windows 7
 ImageBox on Windows 10
 
 ![ImageBox UI on Windows 10](https://github.com/americusmaximus/ImageBox/blob/main/Docs/ImageBox.UI.Win.10.png)
+
 ### Linux
 #### CLI
 ImageBox CLI on xUbuntu 20.04
