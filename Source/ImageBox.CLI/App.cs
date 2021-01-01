@@ -505,7 +505,16 @@ namespace ImageBox.CLI
                             {
                                 if (int.TryParse(value, out var intValue))
                                 {
-                                    splitHorizontal = intValue;
+                                    if (intValue > 0)
+                                    {
+                                        splitHorizontal = intValue;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine(string.Format("Unable to parse <0> as a positive integer value.", value));
+
+                                        return -1;
+                                    }
                                 }
                                 else
                                 {
@@ -518,7 +527,16 @@ namespace ImageBox.CLI
                             {
                                 if (int.TryParse(value, out var intValue))
                                 {
-                                    splitVertical = intValue;
+                                    if (intValue > 0)
+                                    {
+                                        splitVertical = intValue;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine(string.Format("Unable to parse <0> as a positive integer value.", value));
+
+                                        return -1;
+                                    }
                                 }
                                 else
                                 {
