@@ -74,16 +74,16 @@ Below is the output of running a help command
 [Flip] An axis for the image flip. Possible values are "None, "Horizontal", "Vertical", and "Both". Default values is "None".
 
 ##### color
-[Rotate] A fill color. Color can be specified as a name,  ARGB integer, or a HEX value. Example: "red", "-65536", "#00ff0000". Default value is "Transparent".
+[Rotate] A fill color. Color can be specified as a name, ARGB integer, or a HEX value. Example: "red", "-65536", "#00ff0000". Default value is "Transparent".
 
 ##### format
-[Split] An output image(s) format. Possible values are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG, TIFF, and WMF. Default value is BMP.
+[Split] A format of the output image(s). Possible values are BMP, EMF, EXIF, GIF, ICO, JPEG, PNG, TIF, and WMF. Default value is BMP.
 
 ##### horizontal
 [Split] A positive integer number of horizontal units for image splitting. The value is required for the "Split" mode.
 
 ##### image
-A path to the input image file. Image is a required parameter. Supported image formats are BMP, EMF, EXIF, GIF, ICON, JPEG, PNG, TIFF, and WMF.
+A path to the input image file. This is a required parameter. Supported image formats are BMP, EMF, EXIF, GIF, ICO, JPEG, PNG, TIF, and WMF.
 
 ##### matrix
 [Color] A matrix type the image coloring. Possible values:
@@ -131,7 +131,7 @@ A mode of ImageBox execution. Mode is a required parameter. Possible values are 
 - "Stats" mode analyzes the input image and produces color statistics.
 
 ##### output
-A path to the output file, or an output directory for the "Split" mode.
+A path to the output file, or an output directory for the "Split" mode. This is a required parameter. Supported image formats are BMP, EMF, EXIF, GIF, ICO, JPEG, PNG, TIF, and WMF.
 
 ##### unit
 [Split] An image split type. Possible values are "Pixel" and "Piece". Default value is "Pixel".
